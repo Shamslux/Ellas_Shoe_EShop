@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/29/2021 9:33:17 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SHAMSLUX-PC"
+  DTS:CreatorName="SHAMSLUX-PC\João Paulo Müller"
+  DTS:DTSID="{48A7D0F0-7669-409B-867C-74FC67288883}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.132"
+  DTS:LocaleID="1046"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="1"
+  DTS:VersionGUID="{918FDE96-D499-47CE-A2F9-3BEBD00EDA5E}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_STAGE]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{6133F073-6DA1-40FB-882A-625DB407AFA3}"
+      DTS:ObjectName="SHAMSLUX-PC.ELLAS_STAGE">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SHAMSLUX-PC;Initial Catalog=ELLAS_STAGE;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Tarefa Executar SQL"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Tarefa Executar SQL"
+      DTS:DTSID="{1F4960DC-26A0-4969-B089-75158D5C6581}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Tarefa Executar SQL"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{6133F073-6DA1-40FB-882A-625DB407AFA3}"
+          SQLTask:SqlStatementSource="---------------------SELECTS DE INSERT----------------------------------&#xA;&#xA;-- PRODUTO&#xA;&#xA;INSERT INTO&#x9;ELLAS_STAGE.dbo.ST_PRODUTO&#xA;SELECT&#x9;    P.PK_CODIGO&#xA;&#x9;&#x9;    , P.NM_NOME&#xA;&#x9;&#x9;&#x9;, P.NM_MODELO&#xA;&#x9;&#x9;&#x9;, P.NM_MARCA&#xA;&#x9;&#x9;&#x9;, N.NM_NUMERO AS NM_NUMERO_PE&#xA;&#x9;&#x9;&#x9;, C.NM_COR&#xA;&#x9;&#x9;&#x9;, F.NM_NOME AS NM_FORNECEDOR&#xA;FROM&#x9;     ELLAS_OLTP.dbo.PRODUTO&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;P&#xA;INNER&#x9;JOIN ELLAS_OLTP.dbo.NUMERO_PE&#x9;&#x9;&#x9;&#x9;&#x9;N&#xA;  ON P.FK_NUMERO_PE = N.PK_NUMERO_PE&#xA;INNER&#x9;JOIN ELLAS_OLTP.dbo.COR&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;C &#xA;  ON P.FK_COR = C.PK_COR&#xA;INNER&#x9;JOIN ELLAS_OLTP.dbo.FORNECEDOR&#x9;&#x9;&#x9;&#x9;&#x9;F&#xA;  ON P.FK_FORNECEDOR = F.PK_FORNECEDOR&#xA;GO&#xA;-----------------------------------------------------------------------&#xA;&#xA;-- CLIENTE&#xA;&#xA;INSERT INTO ELLAS_STAGE.dbo.ST_CLIENTE&#xA;SELECT&#x9;&#x9;C.PK_CLIENTE&#xA;&#x9;&#x9;&#x9;, C.NM_NOME&#xA;&#x9;&#x9;&#x9;, CASE C.NM_SEXO&#xA;&#x9;&#x9;&#x9;WHEN 'M' THEN 'Masculino'&#xA;&#x9;&#x9;&#x9;WHEN 'F' THEN 'Feminino'&#xA;&#x9;&#x9;&#x9;END AS NM_SEXO&#xA;&#x9;&#x9;&#x9;, (0+ FORMAT(GETDATE(),'yyyyMMdd') - FORMAT(C.DT_NASCIMENTO,'yyyyMMdd'))  /10000 AS QT_IDADE&#xA;&#x9;&#x9;&#x9;, C.TX_EMAIL&#xA;&#x9;&#x9;&#x9;, C.NM_CPF&#xA;&#x9;&#x9;&#x9;, C.NM_RG&#xA;&#x9;&#x9;&#x9;, E.NM_RUA&#xA;&#x9;&#x9;&#x9;, E.NM_BAIRRO&#xA;&#x9;&#x9;&#x9;, E.NM_CIDADE&#xA;&#x9;&#x9;&#x9;, E.NM_ESTADO&#xA;&#x9;&#x9;&#x9;, E.NM_REGIAO&#xA;&#x9;&#x9;&#x9;, E.NM_CEP&#xA;&#x9;&#x9;&#x9;, CASE WHEN (0+ FORMAT(GETDATE(),'yyyyMMdd') - FORMAT(C.DT_NASCIMENTO,'yyyyMMdd'))  /10000 &lt; 18 THEN 'Menor de 18 anos'&#xA;       WHEN (0+ FORMAT(GETDATE(),'yyyyMMdd') - FORMAT(C.DT_NASCIMENTO,'yyyyMMdd'))  /10000 BETWEEN 18 AND 30 THEN  '18 - 30 anos'&#xA;&#x9;   WHEN (0+ FORMAT(GETDATE(),'yyyyMMdd') - FORMAT(C.DT_NASCIMENTO,'yyyyMMdd'))  /10000 BETWEEN 31 AND 40 THEN  '31 - 40 anos'&#xA;&#x9;   WHEN (0+ FORMAT(GETDATE(),'yyyyMMdd') - FORMAT(C.DT_NASCIMENTO,'yyyyMMdd'))  /10000 BETWEEN 41 AND 50 THEN  '41 - 50 anos'&#xA;&#x9;   WHEN (0+ FORMAT(GETDATE(),'yyyyMMdd') - FORMAT(C.DT_NASCIMENTO,'yyyyMMdd'))  /10000 BETWEEN 51 AND 65 THEN  '51 - 65 anos'&#xA;       ELSE  '+65 ANOS' END AS 'NM_FAIXA_ETARIA'&#xA;FROM&#x9;&#x9; ELLAS_OLTP.dbo.CLIENTE&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;C&#xA;INNER&#x9;JOIN ELLAS_OLTP.dbo.ENDERECO_CLIENTE&#x9;&#x9;&#x9;&#x9;&#x9;E&#xA;  ON C.PK_CLIENTE = E.FK_CLIENTE&#xA;GO&#xA;-----------------------------------------------------------------------------------------------------------------------------------------&#xA;&#xA;-- NOTA FISCAL&#xA;&#xA;INSERT INTO ELLAS_STAGE.dbo.ST_NOTA_FISCAL&#xA;SELECT&#x9;&#x9;N.PK_NOTA&#xA;&#x9;&#x9;&#x9;, F.NM_FORMA_PAGAMENTO&#xA;&#x9;&#x9;&#x9;, I.PK_ITEM_NOTA AS FK_ITEM&#xA;FROM&#x9;&#x9; ELLAS_OLTP.dbo.ITEM_NOTA&#x9;&#x9;&#x9;&#x9;I&#xA;INNER&#x9;JOIN ELLAS_OLTP.dbo.NOTA_FISCAL&#x9;&#x9;&#x9;&#x9;N&#xA;  ON I.FK_NOTA = N.PK_NOTA&#xA;INNER&#x9;JOIN ELLAS_OLTP.dbo.FORMA_PAGAMENTO&#x9;&#x9;&#x9;F  &#xA;  ON N.FK_FORMA_PAGAMENTO = F.PK_FORMA_PAGAMENTO&#xA;GO&#xA;-------------------------------------------------------------------------------------------------------------------------------------------&#xA;&#xA;-- FRETE DOS CLIENTES &#xA;&#xA;INSERT INTO ELLAS_STAGE.dbo.ST_FRETE&#xA;SELECT&#x9;&#x9;F.PK_FRETE_C AS PK_FRETE&#xA;&#x9;&#x9;&#x9;, F.NM_TRANSP&#xA;FROM&#x9;&#x9;ELLAS_OLTP.dbo.FRETE_CLIENTE&#x9;&#x9;&#x9;F&#xA;GO&#xA;--------------------------------------------------------------------------&#xA;&#xA;-- FORNECIMENTO&#xA;&#xA;INSERT INTO ELLAS_STAGE.dbo.ST_FORNECIMENTO&#xA;SELECT&#x9;&#x9;F.PK_FRETE_F AS PK_FORNECIMENTO&#xA;&#x9;&#x9;&#x9;, F.NM_TRANSP&#xA;&#x9;&#x9;&#x9;, X.NM_NOME AS NM_FORNECEDOR&#xA;FROM&#x9;&#x9; ELLAS_OLTP.dbo.FRETE_FORNECEDOR&#x9;&#x9;F &#xA;INNER&#x9;JOIN ELLAS_OLTP.dbo.FORNECEDOR&#x9;&#x9;&#x9;&#x9;X&#xA;  ON F.FK_FORNECEDOR = X.PK_FORNECEDOR &#xA;GO&#xA;------------------------------------------------------------------------------&#xA;&#xA;-- FORNECEDOR&#xA;&#xA;INSERT INTO ELLAS_STAGE.dbo.ST_FORNECEDOR&#xA;SELECT&#x9;&#x9;F.PK_FORNECEDOR&#xA;&#x9;&#x9;&#x9;, F.NM_NOME&#xA;&#x9;&#x9;&#x9;, E.NM_RUA&#xA;&#x9;&#x9;&#x9;, E.NM_BAIRRO&#xA;&#x9;&#x9;&#x9;, E.NM_CIDADE&#xA;&#x9;&#x9;&#x9;, E.NM_ESTADO&#xA;&#x9;&#x9;&#x9;, E.NM_REGIAO&#xA;&#x9;&#x9;&#x9;, E.NM_CEP&#xA;FROM&#x9;&#x9; ELLAS_OLTP.dbo.FORNECEDOR&#x9;&#x9;&#x9;&#x9;F&#xA;INNER&#x9;JOIN ELLAS_OLTP.dbo.ENDERECO_FORNECEDOR&#x9;&#x9;E&#xA;  ON F.PK_FORNECEDOR = E.FK_FORNECEDOR&#xA;GO&#xA;-------------------------------------------------------------------------------&#xA;-- FATO DE COMPRAS&#xA;&#xA;INSERT INTO ELLAS_STAGE.dbo.ST_FATO_COMPRA&#xA;SELECT&#x9;&#x9;I.FK_CODIGO&#xA;&#x9;&#x9;&#x9;, F.FK_CLIENTE&#xA;&#x9;&#x9;&#x9;, F.PK_FRETE_C AS FK_FRETE&#xA;&#x9;&#x9;&#x9;, I.PK_ITEM_NOTA AS FK_ITEM&#xA;&#x9;&#x9;&#x9;, N.DT_DATA_COMPRA &#xA;&#x9;&#x9;&#x9;, I.VL_TOTAL_COMPRA AS VL_VALOR_ITEM&#xA;&#x9;&#x9;&#x9;, I.QT_QUANTIDADE&#xA;&#x9;&#x9;&#x9;, F.VL_VALOR AS VL_FRETE_CONSUMIDOR&#xA;&#x9;&#x9;&#x9;, F.QT_PRAZO_DIA AS QT_PRAZO_DIAS&#xA;FROM&#x9;&#x9; ELLAS_OLTP.dbo.FRETE_CLIENTE&#x9;&#x9;    F&#x9;&#x9;&#xA;INNER&#x9;JOIN ELLAS_OLTP.dbo.ITEM_NOTA&#x9;&#x9;&#x9;&#x9;I &#xA;  ON F.FK_NOTA = I.FK_NOTA&#xA;INNER&#x9;JOIN ELLAS_OLTP.dbo.NOTA_FISCAL&#x9;&#x9;&#x9;&#x9;N&#xA;  ON I.FK_NOTA = N.PK_NOTA&#xA;GO   " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Esta seção CDATA contém as informações de layout do pacote. A seção inclui informações como coordenadas (x,y), largura e altura.-->
+<!--Se você editar manualmente esta seção e cometer algum erro, poderá excluí-la. -->
+<!--O pacote ainda poderá ser carregado normalmente, mas as informações de layout anteriores serão perdidas e o designer reorganizará automaticamente os elementos na superfície de design.-->
+<Objects
+  Version="8">
+  <!--Cada nó abaixo conterá propriedades que não afetam o comportamento em tempo de execução.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="176,42.6666666666667"
+          Id="Package\Tarefa Executar SQL"
+          TopLeft="203.124996973202,55.249999012053" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

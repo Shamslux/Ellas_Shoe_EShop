@@ -1,0 +1,2182 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="2/17/2021 11:30:52 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SHAMSLUX-PC"
+  DTS:CreatorName="SHAMSLUX-PC\João Paulo Müller"
+  DTS:DTSID="{46AD7067-5011-4BFD-9DF6-E08A6220D343}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.132"
+  DTS:LocaleID="1046"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="8"
+  DTS:VersionGUID="{17E0440B-A572-43E9-9D0C-09E528FD1870}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Gerenciador de Conexões do Excel]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{6BE14539-76A8-4E19-A624-B8329E864ED4}"
+      DTS:ObjectName="Gerenciador de Conexões do Excel">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.16.0;Data Source=C:\Users\João Paulo Müller\Documents\Projetos BI\Projeto E-Shop de Sapatilhas\Cargas\CLIENTE (Responses).xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_OLTP]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{5E3BAE6A-D0EB-4210-B923-250F29C424DC}"
+      DTS:ObjectName="SHAMSLUX-PC.ELLAS_OLTP">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SHAMSLUX-PC;Initial Catalog=ELLAS_OLTP;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\AUX_TC"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarefa Fluxo de Dados"
+      DTS:DTSID="{19D8A86B-444E-426B-969F-F91A6FE6C8FF}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="AUX_TC"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\AUX_TC\Comando OLE DB"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="Comando OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;2"
+              description="Executa uma instrução SQL para cada linha em um fluxo de dados. Por exemplo, chame um procedimento armazenado 'new employee setup' para cada linha da tabela 'new employees'. Observação: a execução de uma instrução SQL para cada linha de um fluxo de dados grande pode demorar."
+              name="Comando OLE DB"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="O tempo em segundos antes que um comando expire. Zero indica uma expiração infinita."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="O comando SQL a ser executado."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE [dbo].[AUX_TELEFONE_C] SET [NM_NUMERO] = ?,[NM_NUMERO2] = ?,[NM_NUMERO3] = ?,[NM_TIPO] = ?,[NM_TIPO2] = ?,[NM_TIPO3] = ? WHERE [PK_CLIENTE] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\AUX_TC\Comando OLE DB.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_OLTP]"
+                  connectionManagerRefId="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_OLTP]"
+                  description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\AUX_TC\Comando OLE DB.Inputs[Entrada de Comando OLE DB]"
+                  errorOrTruncationOperation="Execução de Comando"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de Comando OLE DB">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\AUX_TC\Comando OLE DB.Inputs[Entrada de Comando OLE DB].Columns[Cópia de NM_NUMERO]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="11"
+                      cachedName="Cópia de NM_NUMERO"
+                      externalMetadataColumnId="Package\AUX_TC\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_0]"
+                      lineageId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_NUMERO]" />
+                    <inputColumn
+                      refId="Package\AUX_TC\Comando OLE DB.Inputs[Entrada de Comando OLE DB].Columns[Cópia de NM_NUMERO 2]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="11"
+                      cachedName="Cópia de NM_NUMERO 2"
+                      externalMetadataColumnId="Package\AUX_TC\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_1]"
+                      lineageId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_NUMERO 2]" />
+                    <inputColumn
+                      refId="Package\AUX_TC\Comando OLE DB.Inputs[Entrada de Comando OLE DB].Columns[Cópia de NM_NUMERO 3]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="11"
+                      cachedName="Cópia de NM_NUMERO 3"
+                      externalMetadataColumnId="Package\AUX_TC\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_2]"
+                      lineageId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_NUMERO 3]" />
+                    <inputColumn
+                      refId="Package\AUX_TC\Comando OLE DB.Inputs[Entrada de Comando OLE DB].Columns[Cópia de NM_TIPO]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="Cópia de NM_TIPO"
+                      externalMetadataColumnId="Package\AUX_TC\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_3]"
+                      lineageId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_TIPO]" />
+                    <inputColumn
+                      refId="Package\AUX_TC\Comando OLE DB.Inputs[Entrada de Comando OLE DB].Columns[Cópia de NM_TIPO 2]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="Cópia de NM_TIPO 2"
+                      externalMetadataColumnId="Package\AUX_TC\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_4]"
+                      lineageId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_TIPO 2]" />
+                    <inputColumn
+                      refId="Package\AUX_TC\Comando OLE DB.Inputs[Entrada de Comando OLE DB].Columns[Cópia de NM_TIPO 3]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="Cópia de NM_TIPO 3"
+                      externalMetadataColumnId="Package\AUX_TC\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_5]"
+                      lineageId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_TIPO 3]" />
+                    <inputColumn
+                      refId="Package\AUX_TC\Comando OLE DB.Inputs[Entrada de Comando OLE DB].Columns[Cópia de PK_CLIENTE]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de PK_CLIENTE"
+                      externalMetadataColumnId="Package\AUX_TC\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_6]"
+                      lineageId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Conversão de Dados].Columns[Cópia de PK_CLIENTE]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_0]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      name="Param_1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      name="Param_2">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_3]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="Param_3">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_4]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="Param_4">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_5]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="Param_5">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_6]"
+                      dataType="i4"
+                      name="Param_6">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\AUX_TC\Comando OLE DB.Outputs[Saída de Comando OLE DB]"
+                  exclusionGroup="1"
+                  name="Saída de Comando OLE DB"
+                  synchronousInputId="Package\AUX_TC\Comando OLE DB.Inputs[Entrada de Comando OLE DB]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\AUX_TC\Comando OLE DB.Outputs[Saída de Erro de Comando OLE DB]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Saída de Erro de Comando OLE DB"
+                  synchronousInputId="Package\AUX_TC\Comando OLE DB.Inputs[Entrada de Comando OLE DB]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\AUX_TC\Comando OLE DB.Outputs[Saída de Erro de Comando OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\AUX_TC\Comando OLE DB.Outputs[Saída de Erro de Comando OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\AUX_TC\Comando OLE DB.Outputs[Saída de Erro de Comando OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\AUX_TC\Comando OLE DB.Outputs[Saída de Erro de Comando OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\AUX_TC\Comando OLE DB 1"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="Comando OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;2"
+              description="Executa uma instrução SQL para cada linha em um fluxo de dados. Por exemplo, chame um procedimento armazenado 'new employee setup' para cada linha da tabela 'new employees'. Observação: a execução de uma instrução SQL para cada linha de um fluxo de dados grande pode demorar."
+              name="Comando OLE DB 1"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="O tempo em segundos antes que um comando expire. Zero indica uma expiração infinita."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="O comando SQL a ser executado."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE [dbo].[AUX_TELEFONE_C] SET [NM_NUMERO] = ?,[NM_NUMERO2] = ?,[NM_NUMERO3] = ?,[NM_TIPO] = ?,[NM_TIPO2] = ?,[NM_TIPO3] = ? WHERE [PK_CLIENTE] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\AUX_TC\Comando OLE DB 1.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_OLTP]"
+                  connectionManagerRefId="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_OLTP]"
+                  description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\AUX_TC\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB]"
+                  errorOrTruncationOperation="Execução de Comando"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de Comando OLE DB">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\AUX_TC\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].Columns[Cópia de NM_NUMERO]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="11"
+                      cachedName="Cópia de NM_NUMERO"
+                      externalMetadataColumnId="Package\AUX_TC\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_0]"
+                      lineageId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_NUMERO]" />
+                    <inputColumn
+                      refId="Package\AUX_TC\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].Columns[Cópia de NM_NUMERO 2]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="11"
+                      cachedName="Cópia de NM_NUMERO 2"
+                      externalMetadataColumnId="Package\AUX_TC\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_1]"
+                      lineageId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_NUMERO 2]" />
+                    <inputColumn
+                      refId="Package\AUX_TC\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].Columns[Cópia de NM_NUMERO 3]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="11"
+                      cachedName="Cópia de NM_NUMERO 3"
+                      externalMetadataColumnId="Package\AUX_TC\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_2]"
+                      lineageId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_NUMERO 3]" />
+                    <inputColumn
+                      refId="Package\AUX_TC\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].Columns[Cópia de NM_TIPO]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="Cópia de NM_TIPO"
+                      externalMetadataColumnId="Package\AUX_TC\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_3]"
+                      lineageId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_TIPO]" />
+                    <inputColumn
+                      refId="Package\AUX_TC\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].Columns[Cópia de NM_TIPO 2]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="Cópia de NM_TIPO 2"
+                      externalMetadataColumnId="Package\AUX_TC\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_4]"
+                      lineageId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_TIPO 2]" />
+                    <inputColumn
+                      refId="Package\AUX_TC\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].Columns[Cópia de NM_TIPO 3]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="Cópia de NM_TIPO 3"
+                      externalMetadataColumnId="Package\AUX_TC\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_5]"
+                      lineageId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_TIPO 3]" />
+                    <inputColumn
+                      refId="Package\AUX_TC\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].Columns[Cópia de PK_CLIENTE]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de PK_CLIENTE"
+                      externalMetadataColumnId="Package\AUX_TC\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_6]"
+                      lineageId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Conversão de Dados].Columns[Cópia de PK_CLIENTE]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_0]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      name="Param_1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      name="Param_2">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_3]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="Param_3">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_4]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="Param_4">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_5]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="Param_5">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_6]"
+                      dataType="i4"
+                      name="Param_6">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\AUX_TC\Comando OLE DB 1.Outputs[Saída de Comando OLE DB]"
+                  exclusionGroup="1"
+                  name="Saída de Comando OLE DB"
+                  synchronousInputId="Package\AUX_TC\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\AUX_TC\Comando OLE DB 1.Outputs[Saída de Erro de Comando OLE DB]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Saída de Erro de Comando OLE DB"
+                  synchronousInputId="Package\AUX_TC\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\AUX_TC\Comando OLE DB 1.Outputs[Saída de Erro de Comando OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\AUX_TC\Comando OLE DB 1.Outputs[Saída de Erro de Comando OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\AUX_TC\Comando OLE DB 1.Outputs[Saída de Erro de Comando OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\AUX_TC\Comando OLE DB 1.Outputs[Saída de Erro de Comando OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\AUX_TC\Conversão de Dados 1"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Conversão de Dados;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;0"
+              description="Conversão de Dados"
+              name="Conversão de Dados 1"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\AUX_TC\Conversão de Dados 1.Inputs[Entrada de Conversão de Dados]"
+                  name="Entrada de Conversão de Dados">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\AUX_TC\Conversão de Dados 1.Inputs[Entrada de Conversão de Dados].Columns[PK_CLIENTE]"
+                      cachedDataType="r8"
+                      cachedName="PK_CLIENTE"
+                      lineageId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].Columns[PK_CLIENTE]" />
+                    <inputColumn
+                      refId="Package\AUX_TC\Conversão de Dados 1.Inputs[Entrada de Conversão de Dados].Columns[NM_TIPO]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="NM_TIPO"
+                      lineageId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].Columns[NM_TIPO]" />
+                    <inputColumn
+                      refId="Package\AUX_TC\Conversão de Dados 1.Inputs[Entrada de Conversão de Dados].Columns[NM_TIPO 2]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="NM_TIPO 2"
+                      lineageId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].Columns[NM_TIPO 2]" />
+                    <inputColumn
+                      refId="Package\AUX_TC\Conversão de Dados 1.Inputs[Entrada de Conversão de Dados].Columns[NM_TIPO 3]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="NM_TIPO 3"
+                      lineageId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].Columns[NM_TIPO 3]" />
+                    <inputColumn
+                      refId="Package\AUX_TC\Conversão de Dados 1.Inputs[Entrada de Conversão de Dados].Columns[NM_NUMERO]"
+                      cachedDataType="r8"
+                      cachedName="NM_NUMERO"
+                      lineageId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].Columns[NM_NUMERO]" />
+                    <inputColumn
+                      refId="Package\AUX_TC\Conversão de Dados 1.Inputs[Entrada de Conversão de Dados].Columns[NM_NUMERO 2]"
+                      cachedDataType="r8"
+                      cachedName="NM_NUMERO 2"
+                      lineageId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].Columns[NM_NUMERO 2]" />
+                    <inputColumn
+                      refId="Package\AUX_TC\Conversão de Dados 1.Inputs[Entrada de Conversão de Dados].Columns[NM_NUMERO 3]"
+                      cachedDataType="r8"
+                      cachedName="NM_NUMERO 3"
+                      lineageId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].Columns[NM_NUMERO 3]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Conversão de Dados]"
+                  exclusionGroup="1"
+                  name="Saída de Conversão de Dados"
+                  synchronousInputId="Package\AUX_TC\Conversão de Dados 1.Inputs[Entrada de Conversão de Dados]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Conversão de Dados].Columns[Cópia de PK_CLIENTE]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Conversão de Dados].Columns[Cópia de PK_CLIENTE]"
+                      name="Cópia de PK_CLIENTE"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].Columns[PK_CLIENTE]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_TIPO]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      length="3"
+                      lineageId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_TIPO]"
+                      name="Cópia de NM_TIPO"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].Columns[NM_TIPO]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_TIPO 2]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      length="3"
+                      lineageId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_TIPO 2]"
+                      name="Cópia de NM_TIPO 2"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].Columns[NM_TIPO 2]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_TIPO 3]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      length="3"
+                      lineageId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_TIPO 3]"
+                      name="Cópia de NM_TIPO 3"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].Columns[NM_TIPO 3]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_NUMERO]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      length="11"
+                      lineageId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_NUMERO]"
+                      name="Cópia de NM_NUMERO"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].Columns[NM_NUMERO]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_NUMERO 2]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      length="11"
+                      lineageId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_NUMERO 2]"
+                      name="Cópia de NM_NUMERO 2"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].Columns[NM_NUMERO 2]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_NUMERO 3]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      length="11"
+                      lineageId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_NUMERO 3]"
+                      name="Cópia de NM_NUMERO 3"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].Columns[NM_NUMERO 3]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Erro de Conversão de Dados]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Saída de Erro de Conversão de Dados"
+                  synchronousInputId="Package\AUX_TC\Conversão de Dados 1.Inputs[Entrada de Conversão de Dados]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Erro de Conversão de Dados].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Erro de Conversão de Dados].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Erro de Conversão de Dados].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Erro de Conversão de Dados].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\AUX_TC\Dimensão de Alteração Lenta"
+              componentClassID="Microsoft.SCD"
+              contactInfo="Dimensão de Alteração Lenta;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;3"
+              description="Atualiza uma dimensão de data warehouse do SQL Server Analysis Services. Atualize registros da dimensão que já estejam presentes e insira os registros que não estão. Por exemplo, atualize a tabela DimProduct do banco de dados OLAP AdventureWorksDW com dados da tabela Products do banco de dados OLTP AdventureWorks."
+              name="Dimensão de Alteração Lenta"
+              version="3">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Especifica a instrução SELECT usada para criar um conjunto de linhas de esquema."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT [NM_NUMERO], [NM_NUMERO2], [NM_NUMERO3], [NM_TIPO], [NM_TIPO2], [NM_TIPO3], [PK_CLIENTE] FROM [dbo].[AUX_TELEFONE_C]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica a cláusula WHERE na instrução SELECT que seleciona a linha atual entre as linhas com chaves de negócios idênticas."
+                  name="CurrentRowWhere"></property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se as atualizações de atributo de histórico são direcionadas para a saída de transformação para atualizações de atributo de alteração."
+                  name="UpdateChangingAttributeHistory">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se a transformação falhará quando as colunas com atributos fixos contiverem alterações."
+                  name="FailOnFixedAttributeChange">false</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica o nome da coluna para o membro inferido."
+                  name="InferredMemberIndicator"></property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se as atualizações de membro inferido são detectadas."
+                  name="EnableInferredMember">true</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se a transformação falhará quando uma pesquisa de registro existente falhar."
+                  name="FailOnLookupFailure">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica que todas as linhas na entrada são novas ou a transformação detecta o tipo de alteração."
+                  name="IncomingRowChangeType"
+                  typeConverter="IncomingRowChangeType">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\AUX_TC\Dimensão de Alteração Lenta.Connections[LookupConnection]"
+                  connectionManagerID="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_OLTP]"
+                  connectionManagerRefId="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_OLTP]"
+                  description="Define a conexão a ser usada para pesquisas na tabela de dimensão"
+                  name="LookupConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\AUX_TC\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta]"
+                  name="Entrada de Dimensão de Alteração Lenta">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\AUX_TC\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].Columns[Cópia de NM_NUMERO]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="11"
+                      cachedName="Cópia de NM_NUMERO"
+                      externalMetadataColumnId="Package\AUX_TC\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[NM_NUMERO]"
+                      lineageId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_NUMERO]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\AUX_TC\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].Columns[Cópia de NM_NUMERO 2]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="11"
+                      cachedName="Cópia de NM_NUMERO 2"
+                      externalMetadataColumnId="Package\AUX_TC\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[NM_NUMERO2]"
+                      lineageId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_NUMERO 2]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\AUX_TC\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].Columns[Cópia de NM_NUMERO 3]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="11"
+                      cachedName="Cópia de NM_NUMERO 3"
+                      externalMetadataColumnId="Package\AUX_TC\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[NM_NUMERO3]"
+                      lineageId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_NUMERO 3]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\AUX_TC\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].Columns[Cópia de NM_TIPO]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="Cópia de NM_TIPO"
+                      externalMetadataColumnId="Package\AUX_TC\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[NM_TIPO]"
+                      lineageId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_TIPO]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\AUX_TC\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].Columns[Cópia de NM_TIPO 2]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="Cópia de NM_TIPO 2"
+                      externalMetadataColumnId="Package\AUX_TC\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[NM_TIPO2]"
+                      lineageId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_TIPO 2]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\AUX_TC\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].Columns[Cópia de NM_TIPO 3]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="Cópia de NM_TIPO 3"
+                      externalMetadataColumnId="Package\AUX_TC\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[NM_TIPO3]"
+                      lineageId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_TIPO 3]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\AUX_TC\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].Columns[Cópia de PK_CLIENTE]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de PK_CLIENTE"
+                      externalMetadataColumnId="Package\AUX_TC\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[PK_CLIENTE]"
+                      lineageId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Conversão de Dados].Columns[Cópia de PK_CLIENTE]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">1</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[NM_NUMERO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      name="NM_NUMERO" />
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[NM_NUMERO2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      name="NM_NUMERO2" />
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[NM_NUMERO3]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      name="NM_NUMERO3" />
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[NM_TIPO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="NM_TIPO" />
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[NM_TIPO2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="NM_TIPO2" />
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[NM_TIPO3]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="NM_TIPO3" />
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[PK_CLIENTE]"
+                      dataType="i4"
+                      name="PK_CLIENTE" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\AUX_TC\Dimensão de Alteração Lenta.Outputs[Saída Inalterada]"
+                  description="Linhas inalteradas"
+                  exclusionGroup="1"
+                  name="Saída Inalterada"
+                  synchronousInputId="Package\AUX_TC\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\AUX_TC\Dimensão de Alteração Lenta.Outputs[Nova Saída]"
+                  description="Novas linhas"
+                  exclusionGroup="1"
+                  name="Nova Saída"
+                  synchronousInputId="Package\AUX_TC\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\AUX_TC\Dimensão de Alteração Lenta.Outputs[Saída de Atributo Fixo]"
+                  description="Linhas com alterações em colunas marcadas com FixedAttribute"
+                  exclusionGroup="1"
+                  name="Saída de Atributo Fixo"
+                  synchronousInputId="Package\AUX_TC\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\AUX_TC\Dimensão de Alteração Lenta.Outputs[Saída de Atualizações de Atributo de Alteração]"
+                  description="Essas linhas contêm novas informações para as alterações da coluna ChangingAttribute (Type 1)"
+                  exclusionGroup="1"
+                  name="Saída de Atualizações de Atributo de Alteração"
+                  synchronousInputId="Package\AUX_TC\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\AUX_TC\Dimensão de Alteração Lenta.Outputs[Saída de Inserções de Atributo de Histórico]"
+                  description="O resultado de alterações de HistoricalAttribute (Type 2) nessas novas linhas"
+                  exclusionGroup="2"
+                  name="Saída de Inserções de Atributo de Histórico"
+                  synchronousInputId="Package\AUX_TC\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\AUX_TC\Dimensão de Alteração Lenta.Outputs[Saída de Atualizações de Membro Inferido]"
+                  description="Informações para atualizar a linha de dimensão inicial sem preenchimento"
+                  exclusionGroup="1"
+                  name="Saída de Atualizações de Membro Inferido"
+                  synchronousInputId="Package\AUX_TC\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\AUX_TC\Inserir Destino"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="Destino OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;4"
+              description="Destino OLE DB"
+              name="Inserir Destino"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="O tempo em segundos antes que um comando expire. Zero indica uma expiração infinita."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowset">[dbo].[AUX_TELEFONE_C]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica a variável que contém o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="O comando SQL a ser executado."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forca o uso do valor da propriedade DefaultCodePage durante a descrição dos dados de caractere."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica o modo usado para acessar o banco de dados."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se os valores fornecidos para colunas de identidade serão copiados no destino. Se false, os valores para colunas de identidade serão gerados automaticamente no destino. Aplicável apenas se o carregamento rápido estiver ativado."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se as colunas que contêm null terão null inserido no destino. Se false, as colunas que contêm null terão seus valores padrão inseridos no destino. Aplicável apenas se o carregamento rápido estiver ativado."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica as opções a serem usadas com o carregamento rápido. Aplicável apenas se o carregamento rápido estiver ativado."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica quando confirmações são emitidas durante a inserção de dados. Um valor de 0 especifica que uma confirmação será emitida ao final da inserção de dados. Aplicável somente se o carregamento rápido estiver ativado."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\AUX_TC\Inserir Destino.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_OLTP]"
+                  connectionManagerRefId="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_OLTP]"
+                  description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\AUX_TC\Inserir Destino.Inputs[Entrada de Destino OLE DB]"
+                  errorOrTruncationOperation="Inserir"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de Destino OLE DB">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\AUX_TC\Inserir Destino.Inputs[Entrada de Destino OLE DB].Columns[Cópia de NM_TIPO]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="Cópia de NM_TIPO"
+                      externalMetadataColumnId="Package\AUX_TC\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[NM_TIPO]"
+                      lineageId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_TIPO]" />
+                    <inputColumn
+                      refId="Package\AUX_TC\Inserir Destino.Inputs[Entrada de Destino OLE DB].Columns[Cópia de NM_TIPO 2]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="Cópia de NM_TIPO 2"
+                      externalMetadataColumnId="Package\AUX_TC\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[NM_TIPO2]"
+                      lineageId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_TIPO 2]" />
+                    <inputColumn
+                      refId="Package\AUX_TC\Inserir Destino.Inputs[Entrada de Destino OLE DB].Columns[Cópia de NM_TIPO 3]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="Cópia de NM_TIPO 3"
+                      externalMetadataColumnId="Package\AUX_TC\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[NM_TIPO3]"
+                      lineageId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_TIPO 3]" />
+                    <inputColumn
+                      refId="Package\AUX_TC\Inserir Destino.Inputs[Entrada de Destino OLE DB].Columns[Cópia de NM_NUMERO]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="11"
+                      cachedName="Cópia de NM_NUMERO"
+                      externalMetadataColumnId="Package\AUX_TC\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[NM_NUMERO]"
+                      lineageId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_NUMERO]" />
+                    <inputColumn
+                      refId="Package\AUX_TC\Inserir Destino.Inputs[Entrada de Destino OLE DB].Columns[Cópia de NM_NUMERO 2]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="11"
+                      cachedName="Cópia de NM_NUMERO 2"
+                      externalMetadataColumnId="Package\AUX_TC\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[NM_NUMERO2]"
+                      lineageId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_NUMERO 2]" />
+                    <inputColumn
+                      refId="Package\AUX_TC\Inserir Destino.Inputs[Entrada de Destino OLE DB].Columns[Cópia de NM_NUMERO 3]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="11"
+                      cachedName="Cópia de NM_NUMERO 3"
+                      externalMetadataColumnId="Package\AUX_TC\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[NM_NUMERO3]"
+                      lineageId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_NUMERO 3]" />
+                    <inputColumn
+                      refId="Package\AUX_TC\Inserir Destino.Inputs[Entrada de Destino OLE DB].Columns[Cópia de PK_CLIENTE]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de PK_CLIENTE"
+                      externalMetadataColumnId="Package\AUX_TC\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[PK_CLIENTE]"
+                      lineageId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Conversão de Dados].Columns[Cópia de PK_CLIENTE]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[PK_AUX_TC]"
+                      dataType="i4"
+                      name="PK_AUX_TC" />
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[NM_TIPO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="NM_TIPO" />
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[NM_TIPO2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="NM_TIPO2" />
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[NM_TIPO3]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="NM_TIPO3" />
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[NM_NUMERO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      name="NM_NUMERO" />
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[NM_NUMERO2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      name="NM_NUMERO2" />
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[NM_NUMERO3]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      name="NM_NUMERO3" />
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[PK_CLIENTE]"
+                      dataType="i4"
+                      name="PK_CLIENTE" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\AUX_TC\Inserir Destino.Outputs[Saída de Erro de Destino OLE DB]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Saída de Erro de Destino OLE DB"
+                  synchronousInputId="Package\AUX_TC\Inserir Destino.Inputs[Entrada de Destino OLE DB]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\AUX_TC\Inserir Destino.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\AUX_TC\Inserir Destino.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\AUX_TC\Inserir Destino.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\AUX_TC\Inserir Destino.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\AUX_TC\Origem do Excel 1"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Origem do Excel;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;1"
+              description="Origem do Excel"
+              name="Origem do Excel 1"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="O tempo em segundos antes que um comando expire. Zero indica uma expiração infinita."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowset">'Form Responses 1$'</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica a variável que contém o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="O comando SQL a ser executado."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="A variável que contém o comando SQL a ser executado."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica o modo usado para acessar o banco de dados."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="O mapeamento de parâmetros no comando SQL para variáveis."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\AUX_TC\Origem do Excel 1.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Gerenciador de Conexões do Excel]"
+                  connectionManagerRefId="Package.ConnectionManagers[Gerenciador de Conexões do Excel]"
+                  description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel]"
+                  name="Saída de Origem do Excel">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].Columns[PK_CLIENTE]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].ExternalColumns[PK_CLIENTE]"
+                      lineageId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].Columns[PK_CLIENTE]"
+                      name="PK_CLIENTE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].Columns[NM_TIPO]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].ExternalColumns[NM_TIPO]"
+                      length="255"
+                      lineageId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].Columns[NM_TIPO]"
+                      name="NM_TIPO"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].Columns[NM_TIPO 2]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].ExternalColumns[NM_TIPO 2]"
+                      length="255"
+                      lineageId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].Columns[NM_TIPO 2]"
+                      name="NM_TIPO 2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].Columns[NM_TIPO 3]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].ExternalColumns[NM_TIPO 3]"
+                      length="255"
+                      lineageId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].Columns[NM_TIPO 3]"
+                      name="NM_TIPO 3"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].Columns[NM_NUMERO]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].ExternalColumns[NM_NUMERO]"
+                      lineageId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].Columns[NM_NUMERO]"
+                      name="NM_NUMERO"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].Columns[NM_NUMERO 2]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].ExternalColumns[NM_NUMERO 2]"
+                      lineageId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].Columns[NM_NUMERO 2]"
+                      name="NM_NUMERO 2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].Columns[NM_NUMERO 3]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].ExternalColumns[NM_NUMERO 3]"
+                      lineageId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].Columns[NM_NUMERO 3]"
+                      name="NM_NUMERO 3"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].ExternalColumns[PK_CLIENTE]"
+                      dataType="r8"
+                      name="PK_CLIENTE" />
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].ExternalColumns[Timestamp]"
+                      dataType="date"
+                      name="Timestamp" />
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].ExternalColumns[NM_NOME]"
+                      dataType="wstr"
+                      length="255"
+                      name="NM_NOME" />
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].ExternalColumns[NM_SEXO]"
+                      dataType="wstr"
+                      length="255"
+                      name="NM_SEXO" />
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].ExternalColumns[DT_NASCIMENTO]"
+                      dataType="date"
+                      name="DT_NASCIMENTO" />
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].ExternalColumns[TX_EMAIL]"
+                      dataType="wstr"
+                      length="255"
+                      name="TX_EMAIL" />
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].ExternalColumns[NM_CPF]"
+                      dataType="r8"
+                      name="NM_CPF" />
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].ExternalColumns[NM_RG]"
+                      dataType="r8"
+                      name="NM_RG" />
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].ExternalColumns[NM_RUA]"
+                      dataType="wstr"
+                      length="255"
+                      name="NM_RUA" />
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].ExternalColumns[NM_BAIRRO]"
+                      dataType="wstr"
+                      length="255"
+                      name="NM_BAIRRO" />
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].ExternalColumns[NM_CIDADE]"
+                      dataType="wstr"
+                      length="255"
+                      name="NM_CIDADE" />
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].ExternalColumns[NM_ESTADO]"
+                      dataType="wstr"
+                      length="255"
+                      name="NM_ESTADO" />
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].ExternalColumns[NM_REGIAO]"
+                      dataType="wstr"
+                      length="255"
+                      name="NM_REGIAO" />
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].ExternalColumns[NM_CEP]"
+                      dataType="wstr"
+                      length="255"
+                      name="NM_CEP" />
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].ExternalColumns[NM_TIPO]"
+                      dataType="wstr"
+                      length="255"
+                      name="NM_TIPO" />
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].ExternalColumns[NM_TIPO 2]"
+                      dataType="wstr"
+                      length="255"
+                      name="NM_TIPO 2" />
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].ExternalColumns[NM_TIPO 3]"
+                      dataType="wstr"
+                      length="255"
+                      name="NM_TIPO 3" />
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].ExternalColumns[NM_NUMERO]"
+                      dataType="r8"
+                      name="NM_NUMERO" />
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].ExternalColumns[NM_NUMERO 2]"
+                      dataType="r8"
+                      name="NM_NUMERO 2" />
+                    <externalMetadataColumn
+                      refId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel].ExternalColumns[NM_NUMERO 3]"
+                      dataType="r8"
+                      name="NM_NUMERO 3" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Erro de Origem do Excel]"
+                  isErrorOut="true"
+                  name="Saída de Erro de Origem do Excel">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Erro de Origem do Excel].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Erro de Origem do Excel].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Erro de Origem do Excel].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Erro de Origem do Excel].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Erro de Origem do Excel].Columns[PK_CLIENTE]"
+                      dataType="r8"
+                      lineageId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Erro de Origem do Excel].Columns[PK_CLIENTE]"
+                      name="PK_CLIENTE" />
+                    <outputColumn
+                      refId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Erro de Origem do Excel].Columns[NM_TIPO]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Erro de Origem do Excel].Columns[NM_TIPO]"
+                      name="NM_TIPO" />
+                    <outputColumn
+                      refId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Erro de Origem do Excel].Columns[NM_TIPO 2]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Erro de Origem do Excel].Columns[NM_TIPO 2]"
+                      name="NM_TIPO 2" />
+                    <outputColumn
+                      refId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Erro de Origem do Excel].Columns[NM_TIPO 3]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Erro de Origem do Excel].Columns[NM_TIPO 3]"
+                      name="NM_TIPO 3" />
+                    <outputColumn
+                      refId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Erro de Origem do Excel].Columns[NM_NUMERO]"
+                      dataType="r8"
+                      lineageId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Erro de Origem do Excel].Columns[NM_NUMERO]"
+                      name="NM_NUMERO" />
+                    <outputColumn
+                      refId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Erro de Origem do Excel].Columns[NM_NUMERO 2]"
+                      dataType="r8"
+                      lineageId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Erro de Origem do Excel].Columns[NM_NUMERO 2]"
+                      name="NM_NUMERO 2" />
+                    <outputColumn
+                      refId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Erro de Origem do Excel].Columns[NM_NUMERO 3]"
+                      dataType="r8"
+                      lineageId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Erro de Origem do Excel].Columns[NM_NUMERO 3]"
+                      name="NM_NUMERO 3" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\AUX_TC.Paths[Nova Saída]"
+              endId="Package\AUX_TC\Inserir Destino.Inputs[Entrada de Destino OLE DB]"
+              name="Nova Saída"
+              startId="Package\AUX_TC\Dimensão de Alteração Lenta.Outputs[Nova Saída]" />
+            <path
+              refId="Package\AUX_TC.Paths[Saída de Atualizações de Atributo de Alteração]"
+              endId="Package\AUX_TC\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB]"
+              name="Saída de Atualizações de Atributo de Alteração"
+              startId="Package\AUX_TC\Dimensão de Alteração Lenta.Outputs[Saída de Atualizações de Atributo de Alteração]" />
+            <path
+              refId="Package\AUX_TC.Paths[Saída de Atualizações de Membro Inferido]"
+              endId="Package\AUX_TC\Comando OLE DB.Inputs[Entrada de Comando OLE DB]"
+              name="Saída de Atualizações de Membro Inferido"
+              startId="Package\AUX_TC\Dimensão de Alteração Lenta.Outputs[Saída de Atualizações de Membro Inferido]" />
+            <path
+              refId="Package\AUX_TC.Paths[Saída de Conversão de Dados]"
+              endId="Package\AUX_TC\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta]"
+              name="Saída de Conversão de Dados"
+              startId="Package\AUX_TC\Conversão de Dados 1.Outputs[Saída de Conversão de Dados]" />
+            <path
+              refId="Package\AUX_TC.Paths[Saída de Origem do Excel]"
+              endId="Package\AUX_TC\Conversão de Dados 1.Inputs[Entrada de Conversão de Dados]"
+              name="Saída de Origem do Excel"
+              startId="Package\AUX_TC\Origem do Excel 1.Outputs[Saída de Origem do Excel]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\CLIENTE_TELEFONE"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarefa Fluxo de Dados"
+      DTS:DTSID="{DD8C7025-8DCA-4D86-AC7E-BB022796F7B3}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="CLIENTE_TELEFONE"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\CLIENTE_TELEFONE\Destino do SQL Server"
+              componentClassID="Microsoft.SQLServerDestination"
+              contactInfo="Destino do SQL Server;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;5"
+              description="Destino do SQL Server"
+              name="Destino do SQL Server"
+              version="5">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forca o uso do valor da propriedade DefaultCodePage durante a descrição dos dados de caractere."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.String"
+                  description="O nome do objeto de banco de dados no qual copiar dados."
+                  expressionType="Notify"
+                  name="BulkInsertTableName">[dbo].[TELEFONE_CLIENTE]</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica que qualquer restrição no objeto de destino será verificada durante a operação de cópia de dados. Corresponde a opção de inserção em massa CHECK_CONSTRAINTS."
+                  name="BulkInsertCheckConstraints">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica o número da primeira linha a ser copiada. Corresponde à opção de inserção em massa FIRSTROW."
+                  expressionType="Notify"
+                  name="BulkInsertFirstRow">-1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica que qualquer disparador de inserção definido no objeto de destino será executado durante a cópia de dados. Corresponde à opção de inserção em massa FIRE_TRIGGERS."
+                  name="BulkInsertFireTriggers">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se os valores fornecidos para colunas de identidade serão copiados no destino. Se false, os valores para colunas de identidade serão gerados automaticamente no destino. Corresponde à opção de inserção em massa KEEPIDENTITY."
+                  name="BulkInsertKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se as colunas que contêm null terão null copiado no destino. Se false, as colunas que contêm null terão seus valores padrão inseridos no destino. Aplicável somente se o carregamento rápido estiver ativado."
+                  name="BulkInsertKeepNulls">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica o número da última linha a ser copiada. Corresponde à opção de inserção em massa LASTROW."
+                  expressionType="Notify"
+                  name="BulkInsertLastRow">-1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica o número máximo de erros de sintaxe e erros de compilação que podem ocorrer antes do cancelamento da operação de cópia de dados. Cada linha que não puder ser copiada será ignorada e contada como um erro. Corresponde à opção de inserção em massa MAXERRORS."
+                  name="BulkInsertMaxErrors">-1</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica como os dados a serem copiados estão classificados. Corresponde à opção de inserção em massa ORDER."
+                  expressionType="Notify"
+                  name="BulkInsertOrder"></property>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica que um bloqueio de nível de tabela é adquirido para a duração da operação de cópia de dados. Corresponde à opção de inserção em massa TABLOCK."
+                  name="BulkInsertTablock">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica a quantidade de tempo em segundos que o adaptador de Destino SQL aguardará antes de encerrar se não houver dados disponíveis para inserção. Um valor de tempo limite de 0 significa que o adaptador de Destino SQL não terá tempo limite."
+                  expressionType="Notify"
+                  name="Timeout">30</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica quando confirmações são emitidas durante a inserção de dados. Um valor de 0 especifica que uma confirmação será emitida ao final da inserção dos dados."
+                  name="MaxInsertCommitSize">0</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\CLIENTE_TELEFONE\Destino do SQL Server.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_OLTP]"
+                  connectionManagerRefId="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_OLTP]"
+                  description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\CLIENTE_TELEFONE\Destino do SQL Server.Inputs[Entrada de Destino do SQL Server]"
+                  hasSideEffects="true"
+                  name="Entrada de Destino do SQL Server">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CLIENTE_TELEFONE\Destino do SQL Server.Inputs[Entrada de Destino do SQL Server].Columns[NM_TIPO]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="NM_TIPO"
+                      externalMetadataColumnId="Package\CLIENTE_TELEFONE\Destino do SQL Server.Inputs[Entrada de Destino do SQL Server].ExternalColumns[NM_TIPO]"
+                      lineageId="Package\CLIENTE_TELEFONE\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[NM_TIPO]" />
+                    <inputColumn
+                      refId="Package\CLIENTE_TELEFONE\Destino do SQL Server.Inputs[Entrada de Destino do SQL Server].Columns[NM_NUMERO]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="11"
+                      cachedName="NM_NUMERO"
+                      externalMetadataColumnId="Package\CLIENTE_TELEFONE\Destino do SQL Server.Inputs[Entrada de Destino do SQL Server].ExternalColumns[NM_NUMERO]"
+                      lineageId="Package\CLIENTE_TELEFONE\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[NM_NUMERO]" />
+                    <inputColumn
+                      refId="Package\CLIENTE_TELEFONE\Destino do SQL Server.Inputs[Entrada de Destino do SQL Server].Columns[PK_CLIENTE]"
+                      cachedDataType="i4"
+                      cachedName="PK_CLIENTE"
+                      externalMetadataColumnId="Package\CLIENTE_TELEFONE\Destino do SQL Server.Inputs[Entrada de Destino do SQL Server].ExternalColumns[FK_CLIENTE]"
+                      lineageId="Package\CLIENTE_TELEFONE\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[PK_CLIENTE]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\CLIENTE_TELEFONE\Destino do SQL Server.Inputs[Entrada de Destino do SQL Server].ExternalColumns[PK_TELEFONE_C]"
+                      dataType="i4"
+                      name="PK_TELEFONE_C" />
+                    <externalMetadataColumn
+                      refId="Package\CLIENTE_TELEFONE\Destino do SQL Server.Inputs[Entrada de Destino do SQL Server].ExternalColumns[NM_TIPO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="NM_TIPO" />
+                    <externalMetadataColumn
+                      refId="Package\CLIENTE_TELEFONE\Destino do SQL Server.Inputs[Entrada de Destino do SQL Server].ExternalColumns[NM_NUMERO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      name="NM_NUMERO" />
+                    <externalMetadataColumn
+                      refId="Package\CLIENTE_TELEFONE\Destino do SQL Server.Inputs[Entrada de Destino do SQL Server].ExternalColumns[FK_CLIENTE]"
+                      dataType="i4"
+                      name="FK_CLIENTE" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\CLIENTE_TELEFONE\Origem OLE DB"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="Origem OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;7"
+              description="Origem OLE DB"
+              name="Origem OLE DB"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="O tempo em segundos antes que um comando expire. Zero indica uma expiração infinita."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Especifica a variável que contém o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="O comando SQL a ser executado."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT * FROM (SELECT PK_CLIENTE
+	   , NM_TIPO
+	   , NM_NUMERO
+FROM ELLAS_OLTP.dbo.AUX_TELEFONE_C
+UNION	ALL
+SELECT PK_CLIENTE
+	   , NM_TIPO2
+	   , NM_NUMERO2
+FROM ELLAS_OLTP.dbo.AUX_TELEFONE_C
+UNION	ALL
+SELECT PK_CLIENTE
+	   , NM_TIPO3
+	   , NM_NUMERO3
+FROM ELLAS_OLTP.dbo.AUX_TELEFONE_C) A
+WHERE NM_TIPO IS NOT NULL</property>
+                <property
+                  dataType="System.String"
+                  description="A variável que contém o comando SQL a ser executado."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forca o uso do valor da propriedade DefaultCodePage durante a descrição dos dados de caractere."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica o modo usado para acessar o banco de dados."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="Os mapeamentos entre os parâmetros no comando SQL e as variáveis."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\CLIENTE_TELEFONE\Origem OLE DB.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_OLTP]"
+                  connectionManagerRefId="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_OLTP]"
+                  description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\CLIENTE_TELEFONE\Origem OLE DB.Outputs[Saída de Origem OLE DB]"
+                  name="Saída de Origem OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CLIENTE_TELEFONE\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[PK_CLIENTE]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CLIENTE_TELEFONE\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[PK_CLIENTE]"
+                      lineageId="Package\CLIENTE_TELEFONE\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[PK_CLIENTE]"
+                      name="PK_CLIENTE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CLIENTE_TELEFONE\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[NM_TIPO]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CLIENTE_TELEFONE\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[NM_TIPO]"
+                      length="3"
+                      lineageId="Package\CLIENTE_TELEFONE\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[NM_TIPO]"
+                      name="NM_TIPO"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CLIENTE_TELEFONE\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[NM_NUMERO]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CLIENTE_TELEFONE\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[NM_NUMERO]"
+                      length="11"
+                      lineageId="Package\CLIENTE_TELEFONE\Origem OLE DB.Outputs[Saída de Origem OLE DB].Columns[NM_NUMERO]"
+                      name="NM_NUMERO"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\CLIENTE_TELEFONE\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[PK_CLIENTE]"
+                      dataType="i4"
+                      name="PK_CLIENTE" />
+                    <externalMetadataColumn
+                      refId="Package\CLIENTE_TELEFONE\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[NM_TIPO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="NM_TIPO" />
+                    <externalMetadataColumn
+                      refId="Package\CLIENTE_TELEFONE\Origem OLE DB.Outputs[Saída de Origem OLE DB].ExternalColumns[NM_NUMERO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      name="NM_NUMERO" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\CLIENTE_TELEFONE\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB]"
+                  isErrorOut="true"
+                  name="Saída de Erro de Origem OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CLIENTE_TELEFONE\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[PK_CLIENTE]"
+                      dataType="i4"
+                      lineageId="Package\CLIENTE_TELEFONE\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[PK_CLIENTE]"
+                      name="PK_CLIENTE" />
+                    <outputColumn
+                      refId="Package\CLIENTE_TELEFONE\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[NM_TIPO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\CLIENTE_TELEFONE\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[NM_TIPO]"
+                      name="NM_TIPO" />
+                    <outputColumn
+                      refId="Package\CLIENTE_TELEFONE\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[NM_NUMERO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      lineageId="Package\CLIENTE_TELEFONE\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[NM_NUMERO]"
+                      name="NM_NUMERO" />
+                    <outputColumn
+                      refId="Package\CLIENTE_TELEFONE\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CLIENTE_TELEFONE\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CLIENTE_TELEFONE\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CLIENTE_TELEFONE\Origem OLE DB.Outputs[Saída de Erro de Origem OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\CLIENTE_TELEFONE.Paths[Saída de Origem OLE DB]"
+              endId="Package\CLIENTE_TELEFONE\Destino do SQL Server.Inputs[Entrada de Destino do SQL Server]"
+              name="Saída de Origem OLE DB"
+              startId="Package\CLIENTE_TELEFONE\Origem OLE DB.Outputs[Saída de Origem OLE DB]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Esta seção CDATA contém as informações de layout do pacote. A seção inclui informações como coordenadas (x,y), largura e altura.-->
+<!--Se você editar manualmente esta seção e cometer algum erro, poderá excluí-la. -->
+<!--O pacote ainda poderá ser carregado normalmente, mas as informações de layout anteriores serão perdidas e o designer reorganizará automaticamente os elementos na superfície de design.-->
+<Objects
+  Version="8">
+  <!--Cada nó abaixo conterá propriedades que não afetam o comportamento em tempo de execução.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="117.333333333334,42.6666666666667"
+          Id="Package\AUX_TC"
+          TopLeft="58.7499991245571,47.4499991515279" />
+        <NodeLayout
+          Size="176,42.6666666666667"
+          Id="Package\CLIENTE_TELEFONE"
+          TopLeft="280.624995818362,86.4499984541536" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\AUX_TC">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="172,42.6666666666667"
+          Id="Package\AUX_TC\Comando OLE DB 1"
+          TopLeft="439.166666666667,313.5" />
+        <NodeLayout
+          Size="185.333333333334,42.6666666666667"
+          Id="Package\AUX_TC\Conversão de Dados 1"
+          TopLeft="204.5,108.166666666667" />
+        <NodeLayout
+          Size="217.333333333334,42.6666666666667"
+          Id="Package\AUX_TC\Dimensão de Alteração Lenta"
+          TopLeft="188.5,210.833333333334" />
+        <NodeLayout
+          Size="165.333333333334,42.6666666666667"
+          Id="Package\AUX_TC\Origem do Excel 1"
+          TopLeft="214.5,5.50000000000004" />
+        <NodeLayout
+          Size="162.666666666667,42.6666666666667"
+          Id="Package\AUX_TC\Comando OLE DB"
+          TopLeft="215.833333333333,313.5" />
+        <NodeLayout
+          Size="149.333333333334,42.6666666666667"
+          Id="Package\AUX_TC\Inserir Destino"
+          TopLeft="5.49999999999996,313.5" />
+        <EdgeLayout
+          Id="Package\AUX_TC.Paths[Saída de Origem do Excel]"
+          TopLeft="297.166666666667,48.1666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\AUX_TC.Paths[Saída de Conversão de Dados]"
+          TopLeft="297.166666666667,150.833333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\AUX_TC.Paths[Saída de Atualizações de Membro Inferido]"
+          TopLeft="297.166666666667,253.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-93.5976953125,20.1254882812501,187.195390625,12.2490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\AUX_TC.Paths[Saída de Atualizações de Atributo de Alteração]"
+          TopLeft="349.5,253.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="175.666666666667,60"
+              Start="0,0"
+              End="175.666666666667,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.4848484848485" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.4848484848485"
+                    Point2="0,20.4848484848485"
+                    Point3="4,20.4848484848485" />
+                  <mssgle:LineSegment
+                    End="171.666666666667,20.4848484848485" />
+                  <mssgle:CubicBezierSegment
+                    Point1="171.666666666667,20.4848484848485"
+                    Point2="175.666666666667,20.4848484848485"
+                    Point3="175.666666666667,24.4848484848485" />
+                  <mssgle:LineSegment
+                    End="175.666666666667,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-15.5293619791666,25.4848484848485,206.725390625,12.2490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\AUX_TC.Paths[Nova Saída]"
+          TopLeft="244.833333333333,253.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-164.666666666667,60.0000000000001"
+              Start="0,0"
+              End="-164.666666666667,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.4848484848485" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.4848484848485"
+                    Point2="0,20.4848484848485"
+                    Point3="-4,20.4848484848485" />
+                  <mssgle:LineSegment
+                    End="-160.666666666667,20.4848484848485" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-160.666666666667,20.4848484848485"
+                    Point2="-164.666666666667,20.4848484848485"
+                    Point3="-164.666666666667,24.4848484848485" />
+                  <mssgle:LineSegment
+                    End="-164.666666666667,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-107.326692708333,25.4848484848485,49.98671875,10.3349609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\AUX_TC\Dimensão de Alteração Lenta">
+    <Properties>
+      <Property>
+        <Name>SCDMetadata</Name>
+        <Value
+          type="q2:string">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SCDWizardMetadata xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionID&gt;{5E3BAE6A-D0EB-4210-B923-250F29C424DC}&lt;/ConnectionID&gt;
+  &lt;TableName&gt;[dbo].[AUX_TELEFONE_C]&lt;/TableName&gt;
+  &lt;InputToColumnsCollection&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Conversão de Dados 1.Saídas[Saída de Conversão de Dados].Colunas[Cópia de NM_NUMERO]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;NM_NUMERO&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Conversão de Dados 1.Saídas[Saída de Conversão de Dados].Colunas[Cópia de NM_NUMERO 2]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;NM_NUMERO2&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Conversão de Dados 1.Saídas[Saída de Conversão de Dados].Colunas[Cópia de NM_NUMERO 3]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;NM_NUMERO3&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Conversão de Dados 1.Saídas[Saída de Conversão de Dados].Colunas[Cópia de NM_TIPO]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;NM_TIPO&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Conversão de Dados 1.Saídas[Saída de Conversão de Dados].Colunas[Cópia de NM_TIPO 2]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;NM_TIPO2&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Conversão de Dados 1.Saídas[Saída de Conversão de Dados].Colunas[Cópia de NM_TIPO 3]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;NM_TIPO3&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Conversão de Dados 1.Saídas[Saída de Conversão de Dados].Colunas[Cópia de PK_CLIENTE]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;PK_CLIENTE&lt;/ColumnName&gt;
+      &lt;KeyType&gt;BusinessKey&lt;/KeyType&gt;
+      &lt;ChangeType&gt;None&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+  &lt;/InputToColumnsCollection&gt;
+  &lt;GeneratedComponentsIdentificationStrings&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;Inserir Destino&lt;/anyType&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;Comando OLE DB&lt;/anyType&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;Comando OLE DB 1&lt;/anyType&gt;
+  &lt;/GeneratedComponentsIdentificationStrings&gt;
+  &lt;FailFixedAttribute&gt;false&lt;/FailFixedAttribute&gt;
+  &lt;FailChangeAttribute&gt;false&lt;/FailChangeAttribute&gt;
+  &lt;UseStartEndDate&gt;false&lt;/UseStartEndDate&gt;
+  &lt;CurrentIndicatorColumn /&gt;
+  &lt;InferredIndicatorColumn /&gt;
+  &lt;ValueCurrent /&gt;
+  &lt;ValueExpired /&gt;
+  &lt;StartDateColumn /&gt;
+  &lt;EndDateColumn /&gt;
+  &lt;DateVariable /&gt;
+  &lt;EnableInferredSupport&gt;true&lt;/EnableInferredSupport&gt;
+&lt;/SCDWizardMetadata&gt;</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\AUX_TC\Inserir Destino">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\CLIENTE_TELEFONE">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="153.333333333334,42.6666666666667"
+          Id="Package\CLIENTE_TELEFONE\Origem OLE DB"
+          TopLeft="220.5,5.50000000000004" />
+        <NodeLayout
+          Size="185.333333333334,42.6666666666667"
+          Id="Package\CLIENTE_TELEFONE\Destino do SQL Server"
+          TopLeft="220.714285714286,132.142857142857" />
+        <EdgeLayout
+          Id="Package\CLIENTE_TELEFONE.Paths[Saída de Origem OLE DB]"
+          TopLeft="297.166666666667,48.1666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="16.2142857142858,83.9761904761904"
+              Start="0,0"
+              End="16.2142857142858,76.4761904761904">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.9880952380952" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,37.9880952380952"
+                    Point2="0,41.9880952380952"
+                    Point3="4,41.9880952380952" />
+                  <mssgle:LineSegment
+                    End="12.2142857142858,41.9880952380952" />
+                  <mssgle:CubicBezierSegment
+                    Point1="12.2142857142858,41.9880952380952"
+                    Point2="16.2142857142858,41.9880952380952"
+                    Point3="16.2142857142858,45.9880952380952" />
+                  <mssgle:LineSegment
+                    End="16.2142857142858,76.4761904761904" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\CLIENTE_TELEFONE\Origem OLE DB">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\CLIENTE_TELEFONE\Destino do SQL Server">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

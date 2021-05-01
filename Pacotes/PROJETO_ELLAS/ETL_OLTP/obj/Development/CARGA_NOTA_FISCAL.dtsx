@@ -1,0 +1,2906 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/18/2021 7:50:40 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SHAMSLUX-PC"
+  DTS:CreatorName="SHAMSLUX-PC\João Paulo Müller"
+  DTS:DTSID="{36E35E6F-6757-458B-B8D6-C2B7DE7EB8D2}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.132"
+  DTS:LocaleID="1046"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="14"
+  DTS:VersionGUID="{0EFC9DFD-C737-494F-B56C-B2CFB11424B7}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Gerenciador de Conexões do Excel]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{704752D4-1E4C-46F2-B6FA-73AD2CF009F3}"
+      DTS:ObjectName="Gerenciador de Conexões do Excel">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.16.0;Data Source=C:\Users\João Paulo Müller\Documents\Projetos BI\Projeto E-Shop de Sapatilhas\Cargas\NOTA_FISCAL (Responses).xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Gerenciador de Conexões do Excel 1]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{92ECD7A9-04C5-4716-A895-E735B789FDAB}"
+      DTS:ObjectName="Gerenciador de Conexões do Excel 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.16.0;Data Source=C:\Users\João Paulo Müller\Documents\Projetos BI\Projeto E-Shop de Sapatilhas\Cargas\ITEM_NOTA_FISCAL (Responses).xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_OLTP]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{7A6216A4-13B9-4238-9A80-C59C1CE25B98}"
+      DTS:ObjectName="SHAMSLUX-PC.ELLAS_OLTP">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SHAMSLUX-PC;Initial Catalog=ELLAS_OLTP;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\CARGA ITEM_NOTA"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarefa Fluxo de Dados"
+      DTS:DTSID="{fd82c380-2311-49be-9d26-c9d3087b7f32}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="CARGA ITEM_NOTA"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Origem do Excel;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;1"
+              description="Origem do Excel"
+              name="CARGA_ITEM_NOTA"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="O tempo em segundos antes que um comando expire. Zero indica uma expiração infinita."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowset">'Form Responses 1$'</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica a variável que contém o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="O comando SQL a ser executado."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="A variável que contém o comando SQL a ser executado."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica o modo usado para acessar o banco de dados."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="O mapeamento de parâmetros no comando SQL para variáveis."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Gerenciador de Conexões do Excel 1]"
+                  connectionManagerRefId="Package.ConnectionManagers[Gerenciador de Conexões do Excel 1]"
+                  description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Origem do Excel]"
+                  name="Saída de Origem do Excel">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Origem do Excel].Columns[VL_TOTAL_COMPRA]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Origem do Excel].ExternalColumns[VL_TOTAL_COMPRA]"
+                      length="255"
+                      lineageId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Origem do Excel].Columns[VL_TOTAL_COMPRA]"
+                      name="VL_TOTAL_COMPRA"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Origem do Excel].Columns[PK_ITEM_NOTA]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Origem do Excel].ExternalColumns[PK_ITEM_NOTA]"
+                      lineageId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Origem do Excel].Columns[PK_ITEM_NOTA]"
+                      name="PK_ITEM_NOTA"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Origem do Excel].Columns[FK_CODIGO]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Origem do Excel].ExternalColumns[FK_CODIGO]"
+                      length="255"
+                      lineageId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Origem do Excel].Columns[FK_CODIGO]"
+                      name="FK_CODIGO"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Origem do Excel].Columns[FK_NOTA]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Origem do Excel].ExternalColumns[FK_NOTA]"
+                      lineageId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Origem do Excel].Columns[FK_NOTA]"
+                      name="FK_NOTA"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Origem do Excel].Columns[QT_QUANTIDADE]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Origem do Excel].ExternalColumns[QT_QUANTIDADE]"
+                      lineageId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Origem do Excel].Columns[QT_QUANTIDADE]"
+                      name="QT_QUANTIDADE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Origem do Excel].Columns[FK_PRECO]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Origem do Excel].ExternalColumns[FK_PRECO]"
+                      lineageId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Origem do Excel].Columns[FK_PRECO]"
+                      name="FK_PRECO"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Origem do Excel].ExternalColumns[VL_TOTAL_COMPRA]"
+                      dataType="wstr"
+                      length="255"
+                      name="VL_TOTAL_COMPRA" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Origem do Excel].ExternalColumns[PK_ITEM_NOTA]"
+                      dataType="r8"
+                      name="PK_ITEM_NOTA" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Origem do Excel].ExternalColumns[FK_CODIGO]"
+                      dataType="wstr"
+                      length="255"
+                      name="FK_CODIGO" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Origem do Excel].ExternalColumns[FK_NOTA]"
+                      dataType="r8"
+                      name="FK_NOTA" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Origem do Excel].ExternalColumns[QT_QUANTIDADE]"
+                      dataType="r8"
+                      name="QT_QUANTIDADE" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Origem do Excel].ExternalColumns[FK_PRECO]"
+                      dataType="r8"
+                      name="FK_PRECO" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Erro de Origem do Excel]"
+                  isErrorOut="true"
+                  name="Saída de Erro de Origem do Excel">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Erro de Origem do Excel].Columns[PK_ITEM_NOTA]"
+                      dataType="r8"
+                      lineageId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Erro de Origem do Excel].Columns[PK_ITEM_NOTA]"
+                      name="PK_ITEM_NOTA" />
+                    <outputColumn
+                      refId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Erro de Origem do Excel].Columns[VL_TOTAL_COMPRA]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Erro de Origem do Excel].Columns[VL_TOTAL_COMPRA]"
+                      name="VL_TOTAL_COMPRA" />
+                    <outputColumn
+                      refId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Erro de Origem do Excel].Columns[FK_CODIGO]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Erro de Origem do Excel].Columns[FK_CODIGO]"
+                      name="FK_CODIGO" />
+                    <outputColumn
+                      refId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Erro de Origem do Excel].Columns[FK_NOTA]"
+                      dataType="r8"
+                      lineageId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Erro de Origem do Excel].Columns[FK_NOTA]"
+                      name="FK_NOTA" />
+                    <outputColumn
+                      refId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Erro de Origem do Excel].Columns[QT_QUANTIDADE]"
+                      dataType="r8"
+                      lineageId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Erro de Origem do Excel].Columns[QT_QUANTIDADE]"
+                      name="QT_QUANTIDADE" />
+                    <outputColumn
+                      refId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Erro de Origem do Excel].Columns[FK_PRECO]"
+                      dataType="r8"
+                      lineageId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Erro de Origem do Excel].Columns[FK_PRECO]"
+                      name="FK_PRECO" />
+                    <outputColumn
+                      refId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Erro de Origem do Excel].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Erro de Origem do Excel].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Erro de Origem do Excel].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Erro de Origem do Excel].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\CARGA ITEM_NOTA\Comando OLE DB"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="Comando OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;2"
+              description="Executa uma instrução SQL para cada linha em um fluxo de dados. Por exemplo, chame um procedimento armazenado 'new employee setup' para cada linha da tabela 'new employees'. Observação: a execução de uma instrução SQL para cada linha de um fluxo de dados grande pode demorar."
+              name="Comando OLE DB"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="O tempo em segundos antes que um comando expire. Zero indica uma expiração infinita."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="O comando SQL a ser executado."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE [dbo].[ITEM_NOTA_TESTE] SET [FK_CODIGO] = ?,[FK_NOTA] = ?,[FK_PRECO] = ?,[QT_QUANTIDADE] = ?,[VL_TOTAL_COMPRA] = ? WHERE [PK_ITEM_NOTA] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\CARGA ITEM_NOTA\Comando OLE DB.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_OLTP]"
+                  connectionManagerRefId="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_OLTP]"
+                  description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\CARGA ITEM_NOTA\Comando OLE DB.Inputs[Entrada de Comando OLE DB]"
+                  errorOrTruncationOperation="Execução de Comando"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de Comando OLE DB">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CARGA ITEM_NOTA\Comando OLE DB.Inputs[Entrada de Comando OLE DB].Columns[Cópia de FK_CODIGO]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="15"
+                      cachedName="Cópia de FK_CODIGO"
+                      externalMetadataColumnId="Package\CARGA ITEM_NOTA\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_0]"
+                      lineageId="Package\CARGA ITEM_NOTA\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de FK_CODIGO]" />
+                    <inputColumn
+                      refId="Package\CARGA ITEM_NOTA\Comando OLE DB.Inputs[Entrada de Comando OLE DB].Columns[Cópia de FK_NOTA]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de FK_NOTA"
+                      externalMetadataColumnId="Package\CARGA ITEM_NOTA\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_1]"
+                      lineageId="Package\CARGA ITEM_NOTA\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de FK_NOTA]" />
+                    <inputColumn
+                      refId="Package\CARGA ITEM_NOTA\Comando OLE DB.Inputs[Entrada de Comando OLE DB].Columns[Cópia de FK_PRECO]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de FK_PRECO"
+                      externalMetadataColumnId="Package\CARGA ITEM_NOTA\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_2]"
+                      lineageId="Package\CARGA ITEM_NOTA\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de FK_PRECO]" />
+                    <inputColumn
+                      refId="Package\CARGA ITEM_NOTA\Comando OLE DB.Inputs[Entrada de Comando OLE DB].Columns[Cópia de PK_ITEM_NOTA]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de PK_ITEM_NOTA"
+                      externalMetadataColumnId="Package\CARGA ITEM_NOTA\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_5]"
+                      lineageId="Package\CARGA ITEM_NOTA\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de PK_ITEM_NOTA]" />
+                    <inputColumn
+                      refId="Package\CARGA ITEM_NOTA\Comando OLE DB.Inputs[Entrada de Comando OLE DB].Columns[Cópia de QT_QUANTIDADE]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de QT_QUANTIDADE"
+                      externalMetadataColumnId="Package\CARGA ITEM_NOTA\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_3]"
+                      lineageId="Package\CARGA ITEM_NOTA\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de QT_QUANTIDADE]" />
+                    <inputColumn
+                      refId="Package\CARGA ITEM_NOTA\Comando OLE DB.Inputs[Entrada de Comando OLE DB].Columns[Cópia de VL_TOTAL_COMPRA]"
+                      cachedDataType="numeric"
+                      cachedName="Cópia de VL_TOTAL_COMPRA"
+                      cachedPrecision="18"
+                      externalMetadataColumnId="Package\CARGA ITEM_NOTA\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_4]"
+                      lineageId="Package\CARGA ITEM_NOTA\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de VL_TOTAL_COMPRA]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\CARGA ITEM_NOTA\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_0]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\CARGA ITEM_NOTA\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_1]"
+                      dataType="i4"
+                      name="Param_1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\CARGA ITEM_NOTA\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_2]"
+                      dataType="i4"
+                      name="Param_2">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\CARGA ITEM_NOTA\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_3]"
+                      dataType="i4"
+                      name="Param_3">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\CARGA ITEM_NOTA\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_4]"
+                      dataType="numeric"
+                      name="Param_4"
+                      precision="10"
+                      scale="2">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\CARGA ITEM_NOTA\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_5]"
+                      dataType="i4"
+                      name="Param_5">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\CARGA ITEM_NOTA\Comando OLE DB.Outputs[Saída de Comando OLE DB]"
+                  exclusionGroup="1"
+                  name="Saída de Comando OLE DB"
+                  synchronousInputId="Package\CARGA ITEM_NOTA\Comando OLE DB.Inputs[Entrada de Comando OLE DB]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\CARGA ITEM_NOTA\Comando OLE DB.Outputs[Saída de Erro de Comando OLE DB]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Saída de Erro de Comando OLE DB"
+                  synchronousInputId="Package\CARGA ITEM_NOTA\Comando OLE DB.Inputs[Entrada de Comando OLE DB]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CARGA ITEM_NOTA\Comando OLE DB.Outputs[Saída de Erro de Comando OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CARGA ITEM_NOTA\Comando OLE DB.Outputs[Saída de Erro de Comando OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CARGA ITEM_NOTA\Comando OLE DB.Outputs[Saída de Erro de Comando OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CARGA ITEM_NOTA\Comando OLE DB.Outputs[Saída de Erro de Comando OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\CARGA ITEM_NOTA\Comando OLE DB 1"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="Comando OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;2"
+              description="Executa uma instrução SQL para cada linha em um fluxo de dados. Por exemplo, chame um procedimento armazenado 'new employee setup' para cada linha da tabela 'new employees'. Observação: a execução de uma instrução SQL para cada linha de um fluxo de dados grande pode demorar."
+              name="Comando OLE DB 1"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="O tempo em segundos antes que um comando expire. Zero indica uma expiração infinita."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="O comando SQL a ser executado."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE [dbo].[ITEM_NOTA_TESTE] SET [FK_CODIGO] = ?,[FK_NOTA] = ?,[FK_PRECO] = ?,[QT_QUANTIDADE] = ?,[VL_TOTAL_COMPRA] = ? WHERE [PK_ITEM_NOTA] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\CARGA ITEM_NOTA\Comando OLE DB 1.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_OLTP]"
+                  connectionManagerRefId="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_OLTP]"
+                  description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\CARGA ITEM_NOTA\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB]"
+                  errorOrTruncationOperation="Execução de Comando"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de Comando OLE DB">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CARGA ITEM_NOTA\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].Columns[Cópia de FK_CODIGO]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="15"
+                      cachedName="Cópia de FK_CODIGO"
+                      externalMetadataColumnId="Package\CARGA ITEM_NOTA\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_0]"
+                      lineageId="Package\CARGA ITEM_NOTA\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de FK_CODIGO]" />
+                    <inputColumn
+                      refId="Package\CARGA ITEM_NOTA\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].Columns[Cópia de FK_NOTA]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de FK_NOTA"
+                      externalMetadataColumnId="Package\CARGA ITEM_NOTA\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_1]"
+                      lineageId="Package\CARGA ITEM_NOTA\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de FK_NOTA]" />
+                    <inputColumn
+                      refId="Package\CARGA ITEM_NOTA\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].Columns[Cópia de FK_PRECO]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de FK_PRECO"
+                      externalMetadataColumnId="Package\CARGA ITEM_NOTA\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_2]"
+                      lineageId="Package\CARGA ITEM_NOTA\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de FK_PRECO]" />
+                    <inputColumn
+                      refId="Package\CARGA ITEM_NOTA\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].Columns[Cópia de PK_ITEM_NOTA]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de PK_ITEM_NOTA"
+                      externalMetadataColumnId="Package\CARGA ITEM_NOTA\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_5]"
+                      lineageId="Package\CARGA ITEM_NOTA\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de PK_ITEM_NOTA]" />
+                    <inputColumn
+                      refId="Package\CARGA ITEM_NOTA\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].Columns[Cópia de QT_QUANTIDADE]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de QT_QUANTIDADE"
+                      externalMetadataColumnId="Package\CARGA ITEM_NOTA\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_3]"
+                      lineageId="Package\CARGA ITEM_NOTA\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de QT_QUANTIDADE]" />
+                    <inputColumn
+                      refId="Package\CARGA ITEM_NOTA\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].Columns[Cópia de VL_TOTAL_COMPRA]"
+                      cachedDataType="numeric"
+                      cachedName="Cópia de VL_TOTAL_COMPRA"
+                      cachedPrecision="18"
+                      externalMetadataColumnId="Package\CARGA ITEM_NOTA\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_4]"
+                      lineageId="Package\CARGA ITEM_NOTA\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de VL_TOTAL_COMPRA]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\CARGA ITEM_NOTA\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_0]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\CARGA ITEM_NOTA\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_1]"
+                      dataType="i4"
+                      name="Param_1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\CARGA ITEM_NOTA\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_2]"
+                      dataType="i4"
+                      name="Param_2">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\CARGA ITEM_NOTA\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_3]"
+                      dataType="i4"
+                      name="Param_3">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\CARGA ITEM_NOTA\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_4]"
+                      dataType="numeric"
+                      name="Param_4"
+                      precision="10"
+                      scale="2">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\CARGA ITEM_NOTA\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_5]"
+                      dataType="i4"
+                      name="Param_5">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\CARGA ITEM_NOTA\Comando OLE DB 1.Outputs[Saída de Comando OLE DB]"
+                  exclusionGroup="1"
+                  name="Saída de Comando OLE DB"
+                  synchronousInputId="Package\CARGA ITEM_NOTA\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\CARGA ITEM_NOTA\Comando OLE DB 1.Outputs[Saída de Erro de Comando OLE DB]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Saída de Erro de Comando OLE DB"
+                  synchronousInputId="Package\CARGA ITEM_NOTA\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CARGA ITEM_NOTA\Comando OLE DB 1.Outputs[Saída de Erro de Comando OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CARGA ITEM_NOTA\Comando OLE DB 1.Outputs[Saída de Erro de Comando OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CARGA ITEM_NOTA\Comando OLE DB 1.Outputs[Saída de Erro de Comando OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CARGA ITEM_NOTA\Comando OLE DB 1.Outputs[Saída de Erro de Comando OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\CARGA ITEM_NOTA\Conversão de Dados"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Conversão de Dados;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;0"
+              description="Conversão de Dados"
+              name="Conversão de Dados"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\CARGA ITEM_NOTA\Conversão de Dados.Inputs[Entrada de Conversão de Dados]"
+                  name="Entrada de Conversão de Dados">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CARGA ITEM_NOTA\Conversão de Dados.Inputs[Entrada de Conversão de Dados].Columns[VL_TOTAL_COMPRA]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="VL_TOTAL_COMPRA"
+                      lineageId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Origem do Excel].Columns[VL_TOTAL_COMPRA]" />
+                    <inputColumn
+                      refId="Package\CARGA ITEM_NOTA\Conversão de Dados.Inputs[Entrada de Conversão de Dados].Columns[PK_ITEM_NOTA]"
+                      cachedDataType="r8"
+                      cachedName="PK_ITEM_NOTA"
+                      lineageId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Origem do Excel].Columns[PK_ITEM_NOTA]" />
+                    <inputColumn
+                      refId="Package\CARGA ITEM_NOTA\Conversão de Dados.Inputs[Entrada de Conversão de Dados].Columns[FK_CODIGO]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="FK_CODIGO"
+                      lineageId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Origem do Excel].Columns[FK_CODIGO]" />
+                    <inputColumn
+                      refId="Package\CARGA ITEM_NOTA\Conversão de Dados.Inputs[Entrada de Conversão de Dados].Columns[FK_NOTA]"
+                      cachedDataType="r8"
+                      cachedName="FK_NOTA"
+                      lineageId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Origem do Excel].Columns[FK_NOTA]" />
+                    <inputColumn
+                      refId="Package\CARGA ITEM_NOTA\Conversão de Dados.Inputs[Entrada de Conversão de Dados].Columns[QT_QUANTIDADE]"
+                      cachedDataType="r8"
+                      cachedName="QT_QUANTIDADE"
+                      lineageId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Origem do Excel].Columns[QT_QUANTIDADE]" />
+                    <inputColumn
+                      refId="Package\CARGA ITEM_NOTA\Conversão de Dados.Inputs[Entrada de Conversão de Dados].Columns[FK_PRECO]"
+                      cachedDataType="r8"
+                      cachedName="FK_PRECO"
+                      lineageId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Origem do Excel].Columns[FK_PRECO]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\CARGA ITEM_NOTA\Conversão de Dados.Outputs[Saída de Conversão de Dados]"
+                  exclusionGroup="1"
+                  name="Saída de Conversão de Dados"
+                  synchronousInputId="Package\CARGA ITEM_NOTA\Conversão de Dados.Inputs[Entrada de Conversão de Dados]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CARGA ITEM_NOTA\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de VL_TOTAL_COMPRA]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\CARGA ITEM_NOTA\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de VL_TOTAL_COMPRA]"
+                      name="Cópia de VL_TOTAL_COMPRA"
+                      precision="18"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Origem do Excel].Columns[VL_TOTAL_COMPRA]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA ITEM_NOTA\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de PK_ITEM_NOTA]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\CARGA ITEM_NOTA\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de PK_ITEM_NOTA]"
+                      name="Cópia de PK_ITEM_NOTA"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Origem do Excel].Columns[PK_ITEM_NOTA]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA ITEM_NOTA\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de FK_NOTA]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\CARGA ITEM_NOTA\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de FK_NOTA]"
+                      name="Cópia de FK_NOTA"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Origem do Excel].Columns[FK_NOTA]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA ITEM_NOTA\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de QT_QUANTIDADE]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\CARGA ITEM_NOTA\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de QT_QUANTIDADE]"
+                      name="Cópia de QT_QUANTIDADE"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Origem do Excel].Columns[QT_QUANTIDADE]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA ITEM_NOTA\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de FK_CODIGO]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      length="15"
+                      lineageId="Package\CARGA ITEM_NOTA\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de FK_CODIGO]"
+                      name="Cópia de FK_CODIGO"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Origem do Excel].Columns[FK_CODIGO]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA ITEM_NOTA\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de FK_PRECO]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\CARGA ITEM_NOTA\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de FK_PRECO]"
+                      name="Cópia de FK_PRECO"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Origem do Excel].Columns[FK_PRECO]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\CARGA ITEM_NOTA\Conversão de Dados.Outputs[Saída de Erro de Conversão de Dados]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Saída de Erro de Conversão de Dados"
+                  synchronousInputId="Package\CARGA ITEM_NOTA\Conversão de Dados.Inputs[Entrada de Conversão de Dados]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CARGA ITEM_NOTA\Conversão de Dados.Outputs[Saída de Erro de Conversão de Dados].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CARGA ITEM_NOTA\Conversão de Dados.Outputs[Saída de Erro de Conversão de Dados].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CARGA ITEM_NOTA\Conversão de Dados.Outputs[Saída de Erro de Conversão de Dados].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CARGA ITEM_NOTA\Conversão de Dados.Outputs[Saída de Erro de Conversão de Dados].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\CARGA ITEM_NOTA\Dimensão de Alteração Lenta"
+              componentClassID="Microsoft.SCD"
+              contactInfo="Dimensão de Alteração Lenta;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;3"
+              description="Atualiza uma dimensão de data warehouse do SQL Server Analysis Services. Atualize registros da dimensão que já estejam presentes e insira os registros que não estão. Por exemplo, atualize a tabela DimProduct do banco de dados OLAP AdventureWorksDW com dados da tabela Products do banco de dados OLTP AdventureWorks."
+              name="Dimensão de Alteração Lenta"
+              version="3">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Especifica a instrução SELECT usada para criar um conjunto de linhas de esquema."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT [FK_CODIGO], [FK_NOTA], [FK_PRECO], [PK_ITEM_NOTA], [QT_QUANTIDADE], [VL_TOTAL_COMPRA] FROM [dbo].[ITEM_NOTA_TESTE]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica a cláusula WHERE na instrução SELECT que seleciona a linha atual entre as linhas com chaves de negócios idênticas."
+                  name="CurrentRowWhere"></property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se as atualizações de atributo de histórico são direcionadas para a saída de transformação para atualizações de atributo de alteração."
+                  name="UpdateChangingAttributeHistory">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se a transformação falhará quando as colunas com atributos fixos contiverem alterações."
+                  name="FailOnFixedAttributeChange">false</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica o nome da coluna para o membro inferido."
+                  name="InferredMemberIndicator"></property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se as atualizações de membro inferido são detectadas."
+                  name="EnableInferredMember">true</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se a transformação falhará quando uma pesquisa de registro existente falhar."
+                  name="FailOnLookupFailure">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica que todas as linhas na entrada são novas ou a transformação detecta o tipo de alteração."
+                  name="IncomingRowChangeType"
+                  typeConverter="IncomingRowChangeType">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\CARGA ITEM_NOTA\Dimensão de Alteração Lenta.Connections[LookupConnection]"
+                  connectionManagerID="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_OLTP]"
+                  connectionManagerRefId="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_OLTP]"
+                  description="Define a conexão a ser usada para pesquisas na tabela de dimensão"
+                  name="LookupConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\CARGA ITEM_NOTA\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta]"
+                  name="Entrada de Dimensão de Alteração Lenta">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CARGA ITEM_NOTA\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].Columns[Cópia de FK_CODIGO]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="15"
+                      cachedName="Cópia de FK_CODIGO"
+                      externalMetadataColumnId="Package\CARGA ITEM_NOTA\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[FK_CODIGO]"
+                      lineageId="Package\CARGA ITEM_NOTA\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de FK_CODIGO]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CARGA ITEM_NOTA\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].Columns[Cópia de FK_NOTA]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de FK_NOTA"
+                      externalMetadataColumnId="Package\CARGA ITEM_NOTA\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[FK_NOTA]"
+                      lineageId="Package\CARGA ITEM_NOTA\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de FK_NOTA]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CARGA ITEM_NOTA\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].Columns[Cópia de FK_PRECO]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de FK_PRECO"
+                      externalMetadataColumnId="Package\CARGA ITEM_NOTA\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[FK_PRECO]"
+                      lineageId="Package\CARGA ITEM_NOTA\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de FK_PRECO]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CARGA ITEM_NOTA\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].Columns[Cópia de PK_ITEM_NOTA]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de PK_ITEM_NOTA"
+                      externalMetadataColumnId="Package\CARGA ITEM_NOTA\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[PK_ITEM_NOTA]"
+                      lineageId="Package\CARGA ITEM_NOTA\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de PK_ITEM_NOTA]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CARGA ITEM_NOTA\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].Columns[Cópia de QT_QUANTIDADE]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de QT_QUANTIDADE"
+                      externalMetadataColumnId="Package\CARGA ITEM_NOTA\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[QT_QUANTIDADE]"
+                      lineageId="Package\CARGA ITEM_NOTA\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de QT_QUANTIDADE]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CARGA ITEM_NOTA\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].Columns[Cópia de VL_TOTAL_COMPRA]"
+                      cachedDataType="numeric"
+                      cachedName="Cópia de VL_TOTAL_COMPRA"
+                      cachedPrecision="18"
+                      externalMetadataColumnId="Package\CARGA ITEM_NOTA\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[VL_TOTAL_COMPRA]"
+                      lineageId="Package\CARGA ITEM_NOTA\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de VL_TOTAL_COMPRA]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\CARGA ITEM_NOTA\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[FK_CODIGO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      name="FK_CODIGO" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA ITEM_NOTA\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[FK_NOTA]"
+                      dataType="i4"
+                      name="FK_NOTA" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA ITEM_NOTA\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[FK_PRECO]"
+                      dataType="i4"
+                      name="FK_PRECO" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA ITEM_NOTA\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[PK_ITEM_NOTA]"
+                      dataType="i4"
+                      name="PK_ITEM_NOTA" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA ITEM_NOTA\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[QT_QUANTIDADE]"
+                      dataType="i4"
+                      name="QT_QUANTIDADE" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA ITEM_NOTA\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[VL_TOTAL_COMPRA]"
+                      dataType="numeric"
+                      name="VL_TOTAL_COMPRA"
+                      precision="10"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\CARGA ITEM_NOTA\Dimensão de Alteração Lenta.Outputs[Saída Inalterada]"
+                  description="Linhas inalteradas"
+                  exclusionGroup="1"
+                  name="Saída Inalterada"
+                  synchronousInputId="Package\CARGA ITEM_NOTA\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\CARGA ITEM_NOTA\Dimensão de Alteração Lenta.Outputs[Nova Saída]"
+                  description="Novas linhas"
+                  exclusionGroup="1"
+                  name="Nova Saída"
+                  synchronousInputId="Package\CARGA ITEM_NOTA\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\CARGA ITEM_NOTA\Dimensão de Alteração Lenta.Outputs[Saída de Atributo Fixo]"
+                  description="Linhas com alterações em colunas marcadas com FixedAttribute"
+                  exclusionGroup="1"
+                  name="Saída de Atributo Fixo"
+                  synchronousInputId="Package\CARGA ITEM_NOTA\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\CARGA ITEM_NOTA\Dimensão de Alteração Lenta.Outputs[Saída de Atualizações de Atributo de Alteração]"
+                  description="Essas linhas contêm novas informações para as alterações da coluna ChangingAttribute (Type 1)"
+                  exclusionGroup="1"
+                  name="Saída de Atualizações de Atributo de Alteração"
+                  synchronousInputId="Package\CARGA ITEM_NOTA\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\CARGA ITEM_NOTA\Dimensão de Alteração Lenta.Outputs[Saída de Inserções de Atributo de Histórico]"
+                  description="O resultado de alterações de HistoricalAttribute (Type 2) nessas novas linhas"
+                  exclusionGroup="2"
+                  name="Saída de Inserções de Atributo de Histórico"
+                  synchronousInputId="Package\CARGA ITEM_NOTA\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\CARGA ITEM_NOTA\Dimensão de Alteração Lenta.Outputs[Saída de Atualizações de Membro Inferido]"
+                  description="Informações para atualizar a linha de dimensão inicial sem preenchimento"
+                  exclusionGroup="1"
+                  name="Saída de Atualizações de Membro Inferido"
+                  synchronousInputId="Package\CARGA ITEM_NOTA\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\CARGA ITEM_NOTA\Inserir Destino"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="Destino OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;4"
+              description="Destino OLE DB"
+              name="Inserir Destino"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="O tempo em segundos antes que um comando expire. Zero indica uma expiração infinita."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowset">[dbo].[ITEM_NOTA_TESTE]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica a variável que contém o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="O comando SQL a ser executado."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forca o uso do valor da propriedade DefaultCodePage durante a descrição dos dados de caractere."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica o modo usado para acessar o banco de dados."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se os valores fornecidos para colunas de identidade serão copiados no destino. Se false, os valores para colunas de identidade serão gerados automaticamente no destino. Aplicável apenas se o carregamento rápido estiver ativado."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se as colunas que contêm null terão null inserido no destino. Se false, as colunas que contêm null terão seus valores padrão inseridos no destino. Aplicável apenas se o carregamento rápido estiver ativado."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica as opções a serem usadas com o carregamento rápido. Aplicável apenas se o carregamento rápido estiver ativado."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica quando confirmações são emitidas durante a inserção de dados. Um valor de 0 especifica que uma confirmação será emitida ao final da inserção de dados. Aplicável somente se o carregamento rápido estiver ativado."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\CARGA ITEM_NOTA\Inserir Destino.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_OLTP]"
+                  connectionManagerRefId="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_OLTP]"
+                  description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\CARGA ITEM_NOTA\Inserir Destino.Inputs[Entrada de Destino OLE DB]"
+                  errorOrTruncationOperation="Inserir"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de Destino OLE DB">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CARGA ITEM_NOTA\Inserir Destino.Inputs[Entrada de Destino OLE DB].Columns[Cópia de PK_ITEM_NOTA]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de PK_ITEM_NOTA"
+                      externalMetadataColumnId="Package\CARGA ITEM_NOTA\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[PK_ITEM_NOTA]"
+                      lineageId="Package\CARGA ITEM_NOTA\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de PK_ITEM_NOTA]" />
+                    <inputColumn
+                      refId="Package\CARGA ITEM_NOTA\Inserir Destino.Inputs[Entrada de Destino OLE DB].Columns[Cópia de FK_CODIGO]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="15"
+                      cachedName="Cópia de FK_CODIGO"
+                      externalMetadataColumnId="Package\CARGA ITEM_NOTA\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[FK_CODIGO]"
+                      lineageId="Package\CARGA ITEM_NOTA\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de FK_CODIGO]" />
+                    <inputColumn
+                      refId="Package\CARGA ITEM_NOTA\Inserir Destino.Inputs[Entrada de Destino OLE DB].Columns[Cópia de FK_NOTA]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de FK_NOTA"
+                      externalMetadataColumnId="Package\CARGA ITEM_NOTA\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[FK_NOTA]"
+                      lineageId="Package\CARGA ITEM_NOTA\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de FK_NOTA]" />
+                    <inputColumn
+                      refId="Package\CARGA ITEM_NOTA\Inserir Destino.Inputs[Entrada de Destino OLE DB].Columns[Cópia de QT_QUANTIDADE]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de QT_QUANTIDADE"
+                      externalMetadataColumnId="Package\CARGA ITEM_NOTA\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[QT_QUANTIDADE]"
+                      lineageId="Package\CARGA ITEM_NOTA\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de QT_QUANTIDADE]" />
+                    <inputColumn
+                      refId="Package\CARGA ITEM_NOTA\Inserir Destino.Inputs[Entrada de Destino OLE DB].Columns[Cópia de FK_PRECO]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de FK_PRECO"
+                      externalMetadataColumnId="Package\CARGA ITEM_NOTA\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[FK_PRECO]"
+                      lineageId="Package\CARGA ITEM_NOTA\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de FK_PRECO]" />
+                    <inputColumn
+                      refId="Package\CARGA ITEM_NOTA\Inserir Destino.Inputs[Entrada de Destino OLE DB].Columns[Cópia de VL_TOTAL_COMPRA]"
+                      cachedDataType="numeric"
+                      cachedName="Cópia de VL_TOTAL_COMPRA"
+                      cachedPrecision="18"
+                      externalMetadataColumnId="Package\CARGA ITEM_NOTA\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[VL_TOTAL_COMPRA]"
+                      lineageId="Package\CARGA ITEM_NOTA\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de VL_TOTAL_COMPRA]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\CARGA ITEM_NOTA\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[PK_ITEM_NOTA]"
+                      dataType="i4"
+                      name="PK_ITEM_NOTA" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA ITEM_NOTA\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[FK_CODIGO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      name="FK_CODIGO" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA ITEM_NOTA\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[FK_NOTA]"
+                      dataType="i4"
+                      name="FK_NOTA" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA ITEM_NOTA\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[QT_QUANTIDADE]"
+                      dataType="i4"
+                      name="QT_QUANTIDADE" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA ITEM_NOTA\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[FK_PRECO]"
+                      dataType="i4"
+                      name="FK_PRECO" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA ITEM_NOTA\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[VL_TOTAL_COMPRA]"
+                      dataType="numeric"
+                      name="VL_TOTAL_COMPRA"
+                      precision="10"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\CARGA ITEM_NOTA\Inserir Destino.Outputs[Saída de Erro de Destino OLE DB]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Saída de Erro de Destino OLE DB"
+                  synchronousInputId="Package\CARGA ITEM_NOTA\Inserir Destino.Inputs[Entrada de Destino OLE DB]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CARGA ITEM_NOTA\Inserir Destino.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CARGA ITEM_NOTA\Inserir Destino.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CARGA ITEM_NOTA\Inserir Destino.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CARGA ITEM_NOTA\Inserir Destino.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\CARGA ITEM_NOTA.Paths[Nova Saída]"
+              endId="Package\CARGA ITEM_NOTA\Inserir Destino.Inputs[Entrada de Destino OLE DB]"
+              name="Nova Saída"
+              startId="Package\CARGA ITEM_NOTA\Dimensão de Alteração Lenta.Outputs[Nova Saída]" />
+            <path
+              refId="Package\CARGA ITEM_NOTA.Paths[Saída de Atualizações de Atributo de Alteração]"
+              endId="Package\CARGA ITEM_NOTA\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB]"
+              name="Saída de Atualizações de Atributo de Alteração"
+              startId="Package\CARGA ITEM_NOTA\Dimensão de Alteração Lenta.Outputs[Saída de Atualizações de Atributo de Alteração]" />
+            <path
+              refId="Package\CARGA ITEM_NOTA.Paths[Saída de Atualizações de Membro Inferido]"
+              endId="Package\CARGA ITEM_NOTA\Comando OLE DB.Inputs[Entrada de Comando OLE DB]"
+              name="Saída de Atualizações de Membro Inferido"
+              startId="Package\CARGA ITEM_NOTA\Dimensão de Alteração Lenta.Outputs[Saída de Atualizações de Membro Inferido]" />
+            <path
+              refId="Package\CARGA ITEM_NOTA.Paths[Saída de Conversão de Dados]"
+              endId="Package\CARGA ITEM_NOTA\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta]"
+              name="Saída de Conversão de Dados"
+              startId="Package\CARGA ITEM_NOTA\Conversão de Dados.Outputs[Saída de Conversão de Dados]" />
+            <path
+              refId="Package\CARGA ITEM_NOTA.Paths[Saída de Origem do Excel]"
+              endId="Package\CARGA ITEM_NOTA\Conversão de Dados.Inputs[Entrada de Conversão de Dados]"
+              name="Saída de Origem do Excel"
+              startId="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA.Outputs[Saída de Origem do Excel]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\CARGA_NOTA_FISCAL"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarefa Fluxo de Dados"
+      DTS:DTSID="{F04BC8BD-9641-44F9-B8A9-AB62802E9BA4}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="CARGA_NOTA_FISCAL"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Origem do Excel;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;1"
+              description="Origem do Excel"
+              name="CARGA_NOTA_FISCAL"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="O tempo em segundos antes que um comando expire. Zero indica uma expiração infinita."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowset">'Form Responses 1$'</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica a variável que contém o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="O comando SQL a ser executado."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="A variável que contém o comando SQL a ser executado."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica o modo usado para acessar o banco de dados."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="O mapeamento de parâmetros no comando SQL para variáveis."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Gerenciador de Conexões do Excel]"
+                  connectionManagerRefId="Package.ConnectionManagers[Gerenciador de Conexões do Excel]"
+                  description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Origem do Excel]"
+                  name="Saída de Origem do Excel">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Origem do Excel].Columns[PK_NOTA]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Origem do Excel].ExternalColumns[PK_NOTA]"
+                      lineageId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Origem do Excel].Columns[PK_NOTA]"
+                      name="PK_NOTA"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Origem do Excel].Columns[DT_DATA_COMPRA]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Origem do Excel].ExternalColumns[DT_DATA_COMPRA]"
+                      length="255"
+                      lineageId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Origem do Excel].Columns[DT_DATA_COMPRA]"
+                      name="DT_DATA_COMPRA"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Origem do Excel].Columns[VL_TOTAL_COMPRA]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Origem do Excel].ExternalColumns[VL_TOTAL_COMPRA]"
+                      length="255"
+                      lineageId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Origem do Excel].Columns[VL_TOTAL_COMPRA]"
+                      name="VL_TOTAL_COMPRA"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Origem do Excel].Columns[FK_FORMA_PAGAMENTO]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Origem do Excel].ExternalColumns[FK_FORMA_PAGAMENTO]"
+                      lineageId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Origem do Excel].Columns[FK_FORMA_PAGAMENTO]"
+                      name="FK_FORMA_PAGAMENTO"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Origem do Excel].Columns[FK_CLIENTE]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Origem do Excel].ExternalColumns[FK_CLIENTE]"
+                      lineageId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Origem do Excel].Columns[FK_CLIENTE]"
+                      name="FK_CLIENTE"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Origem do Excel].ExternalColumns[PK_NOTA]"
+                      dataType="r8"
+                      name="PK_NOTA" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Origem do Excel].ExternalColumns[DT_DATA_COMPRA]"
+                      dataType="wstr"
+                      length="255"
+                      name="DT_DATA_COMPRA" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Origem do Excel].ExternalColumns[VL_TOTAL_COMPRA]"
+                      dataType="wstr"
+                      length="255"
+                      name="VL_TOTAL_COMPRA" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Origem do Excel].ExternalColumns[FK_FORMA_PAGAMENTO]"
+                      dataType="r8"
+                      name="FK_FORMA_PAGAMENTO" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Origem do Excel].ExternalColumns[FK_CLIENTE]"
+                      dataType="r8"
+                      name="FK_CLIENTE" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Origem do Excel].ExternalColumns[NoName]"
+                      dataType="wstr"
+                      length="255"
+                      name="NoName" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Origem do Excel].ExternalColumns[F7]"
+                      dataType="wstr"
+                      length="255"
+                      name="F7" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Erro de Origem do Excel]"
+                  isErrorOut="true"
+                  name="Saída de Erro de Origem do Excel">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Erro de Origem do Excel].Columns[PK_NOTA]"
+                      dataType="r8"
+                      lineageId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Erro de Origem do Excel].Columns[PK_NOTA]"
+                      name="PK_NOTA" />
+                    <outputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Erro de Origem do Excel].Columns[DT_DATA_COMPRA]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Erro de Origem do Excel].Columns[DT_DATA_COMPRA]"
+                      name="DT_DATA_COMPRA" />
+                    <outputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Erro de Origem do Excel].Columns[VL_TOTAL_COMPRA]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Erro de Origem do Excel].Columns[VL_TOTAL_COMPRA]"
+                      name="VL_TOTAL_COMPRA" />
+                    <outputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Erro de Origem do Excel].Columns[FK_FORMA_PAGAMENTO]"
+                      dataType="r8"
+                      lineageId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Erro de Origem do Excel].Columns[FK_FORMA_PAGAMENTO]"
+                      name="FK_FORMA_PAGAMENTO" />
+                    <outputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Erro de Origem do Excel].Columns[FK_CLIENTE]"
+                      dataType="r8"
+                      lineageId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Erro de Origem do Excel].Columns[FK_CLIENTE]"
+                      name="FK_CLIENTE" />
+                    <outputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Erro de Origem do Excel].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Erro de Origem do Excel].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Erro de Origem do Excel].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Erro de Origem do Excel].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\CARGA_NOTA_FISCAL\Comando OLE DB"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="Comando OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;2"
+              description="Executa uma instrução SQL para cada linha em um fluxo de dados. Por exemplo, chame um procedimento armazenado 'new employee setup' para cada linha da tabela 'new employees'. Observação: a execução de uma instrução SQL para cada linha de um fluxo de dados grande pode demorar."
+              name="Comando OLE DB"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="O tempo em segundos antes que um comando expire. Zero indica uma expiração infinita."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="O comando SQL a ser executado."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE [dbo].[NOTA_FISCAL] SET [DT_DATA_COMPRA] = ?,[FK_CLIENTE] = ?,[FK_FORMA_PAGAMENTO] = ?,[VL_TOTAL_COMPRA] = ? WHERE [PK_NOTA] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\CARGA_NOTA_FISCAL\Comando OLE DB.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_OLTP]"
+                  connectionManagerRefId="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_OLTP]"
+                  description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\CARGA_NOTA_FISCAL\Comando OLE DB.Inputs[Entrada de Comando OLE DB]"
+                  errorOrTruncationOperation="Execução de Comando"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de Comando OLE DB">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Comando OLE DB.Inputs[Entrada de Comando OLE DB].Columns[Cópia de DT_DATA_COMPRA]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Cópia de DT_DATA_COMPRA"
+                      externalMetadataColumnId="Package\CARGA_NOTA_FISCAL\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_0]"
+                      lineageId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de DT_DATA_COMPRA]" />
+                    <inputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Comando OLE DB.Inputs[Entrada de Comando OLE DB].Columns[Cópia de FK_CLIENTE]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de FK_CLIENTE"
+                      externalMetadataColumnId="Package\CARGA_NOTA_FISCAL\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_1]"
+                      lineageId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de FK_CLIENTE]" />
+                    <inputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Comando OLE DB.Inputs[Entrada de Comando OLE DB].Columns[Cópia de FK_FORMA_PAGAMENTO]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de FK_FORMA_PAGAMENTO"
+                      externalMetadataColumnId="Package\CARGA_NOTA_FISCAL\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_2]"
+                      lineageId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de FK_FORMA_PAGAMENTO]" />
+                    <inputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Comando OLE DB.Inputs[Entrada de Comando OLE DB].Columns[Cópia de PK_NOTA]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de PK_NOTA"
+                      externalMetadataColumnId="Package\CARGA_NOTA_FISCAL\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_4]"
+                      lineageId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de PK_NOTA]" />
+                    <inputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Comando OLE DB.Inputs[Entrada de Comando OLE DB].Columns[Cópia de VL_TOTAL_COMPRA]"
+                      cachedDataType="numeric"
+                      cachedName="Cópia de VL_TOTAL_COMPRA"
+                      cachedPrecision="18"
+                      externalMetadataColumnId="Package\CARGA_NOTA_FISCAL\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_3]"
+                      lineageId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de VL_TOTAL_COMPRA]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_0]"
+                      dataType="dbTimeStamp"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_1]"
+                      dataType="i4"
+                      name="Param_1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_2]"
+                      dataType="i4"
+                      name="Param_2">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_3]"
+                      dataType="numeric"
+                      name="Param_3"
+                      precision="10"
+                      scale="2">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_4]"
+                      dataType="i4"
+                      name="Param_4">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\CARGA_NOTA_FISCAL\Comando OLE DB.Outputs[Saída de Comando OLE DB]"
+                  exclusionGroup="1"
+                  name="Saída de Comando OLE DB"
+                  synchronousInputId="Package\CARGA_NOTA_FISCAL\Comando OLE DB.Inputs[Entrada de Comando OLE DB]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\CARGA_NOTA_FISCAL\Comando OLE DB.Outputs[Saída de Erro de Comando OLE DB]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Saída de Erro de Comando OLE DB"
+                  synchronousInputId="Package\CARGA_NOTA_FISCAL\Comando OLE DB.Inputs[Entrada de Comando OLE DB]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Comando OLE DB.Outputs[Saída de Erro de Comando OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CARGA_NOTA_FISCAL\Comando OLE DB.Outputs[Saída de Erro de Comando OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Comando OLE DB.Outputs[Saída de Erro de Comando OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CARGA_NOTA_FISCAL\Comando OLE DB.Outputs[Saída de Erro de Comando OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\CARGA_NOTA_FISCAL\Comando OLE DB 1"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="Comando OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;2"
+              description="Executa uma instrução SQL para cada linha em um fluxo de dados. Por exemplo, chame um procedimento armazenado 'new employee setup' para cada linha da tabela 'new employees'. Observação: a execução de uma instrução SQL para cada linha de um fluxo de dados grande pode demorar."
+              name="Comando OLE DB 1"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="O tempo em segundos antes que um comando expire. Zero indica uma expiração infinita."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="O comando SQL a ser executado."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE [dbo].[NOTA_FISCAL] SET [DT_DATA_COMPRA] = ?,[FK_CLIENTE] = ?,[FK_FORMA_PAGAMENTO] = ?,[VL_TOTAL_COMPRA] = ? WHERE [PK_NOTA] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\CARGA_NOTA_FISCAL\Comando OLE DB 1.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_OLTP]"
+                  connectionManagerRefId="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_OLTP]"
+                  description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\CARGA_NOTA_FISCAL\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB]"
+                  errorOrTruncationOperation="Execução de Comando"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de Comando OLE DB">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].Columns[Cópia de DT_DATA_COMPRA]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Cópia de DT_DATA_COMPRA"
+                      externalMetadataColumnId="Package\CARGA_NOTA_FISCAL\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_0]"
+                      lineageId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de DT_DATA_COMPRA]" />
+                    <inputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].Columns[Cópia de FK_CLIENTE]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de FK_CLIENTE"
+                      externalMetadataColumnId="Package\CARGA_NOTA_FISCAL\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_1]"
+                      lineageId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de FK_CLIENTE]" />
+                    <inputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].Columns[Cópia de FK_FORMA_PAGAMENTO]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de FK_FORMA_PAGAMENTO"
+                      externalMetadataColumnId="Package\CARGA_NOTA_FISCAL\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_2]"
+                      lineageId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de FK_FORMA_PAGAMENTO]" />
+                    <inputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].Columns[Cópia de PK_NOTA]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de PK_NOTA"
+                      externalMetadataColumnId="Package\CARGA_NOTA_FISCAL\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_4]"
+                      lineageId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de PK_NOTA]" />
+                    <inputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].Columns[Cópia de VL_TOTAL_COMPRA]"
+                      cachedDataType="numeric"
+                      cachedName="Cópia de VL_TOTAL_COMPRA"
+                      cachedPrecision="18"
+                      externalMetadataColumnId="Package\CARGA_NOTA_FISCAL\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_3]"
+                      lineageId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de VL_TOTAL_COMPRA]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_0]"
+                      dataType="dbTimeStamp"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_1]"
+                      dataType="i4"
+                      name="Param_1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_2]"
+                      dataType="i4"
+                      name="Param_2">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_3]"
+                      dataType="numeric"
+                      name="Param_3"
+                      precision="10"
+                      scale="2">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_4]"
+                      dataType="i4"
+                      name="Param_4">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\CARGA_NOTA_FISCAL\Comando OLE DB 1.Outputs[Saída de Comando OLE DB]"
+                  exclusionGroup="1"
+                  name="Saída de Comando OLE DB"
+                  synchronousInputId="Package\CARGA_NOTA_FISCAL\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\CARGA_NOTA_FISCAL\Comando OLE DB 1.Outputs[Saída de Erro de Comando OLE DB]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Saída de Erro de Comando OLE DB"
+                  synchronousInputId="Package\CARGA_NOTA_FISCAL\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Comando OLE DB 1.Outputs[Saída de Erro de Comando OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CARGA_NOTA_FISCAL\Comando OLE DB 1.Outputs[Saída de Erro de Comando OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Comando OLE DB 1.Outputs[Saída de Erro de Comando OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CARGA_NOTA_FISCAL\Comando OLE DB 1.Outputs[Saída de Erro de Comando OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\CARGA_NOTA_FISCAL\Conversão de Dados"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Conversão de Dados;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;0"
+              description="Conversão de Dados"
+              name="Conversão de Dados"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Inputs[Entrada de Conversão de Dados]"
+                  name="Entrada de Conversão de Dados">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Inputs[Entrada de Conversão de Dados].Columns[PK_NOTA]"
+                      cachedDataType="r8"
+                      cachedName="PK_NOTA"
+                      lineageId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Origem do Excel].Columns[PK_NOTA]" />
+                    <inputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Inputs[Entrada de Conversão de Dados].Columns[DT_DATA_COMPRA]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="DT_DATA_COMPRA"
+                      lineageId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Origem do Excel].Columns[DT_DATA_COMPRA]" />
+                    <inputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Inputs[Entrada de Conversão de Dados].Columns[VL_TOTAL_COMPRA]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="VL_TOTAL_COMPRA"
+                      lineageId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Origem do Excel].Columns[VL_TOTAL_COMPRA]" />
+                    <inputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Inputs[Entrada de Conversão de Dados].Columns[FK_FORMA_PAGAMENTO]"
+                      cachedDataType="r8"
+                      cachedName="FK_FORMA_PAGAMENTO"
+                      lineageId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Origem do Excel].Columns[FK_FORMA_PAGAMENTO]" />
+                    <inputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Inputs[Entrada de Conversão de Dados].Columns[FK_CLIENTE]"
+                      cachedDataType="r8"
+                      cachedName="FK_CLIENTE"
+                      lineageId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Origem do Excel].Columns[FK_CLIENTE]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Outputs[Saída de Conversão de Dados]"
+                  exclusionGroup="1"
+                  name="Saída de Conversão de Dados"
+                  synchronousInputId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Inputs[Entrada de Conversão de Dados]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de PK_NOTA]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de PK_NOTA]"
+                      name="Cópia de PK_NOTA"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Origem do Excel].Columns[PK_NOTA]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de DT_DATA_COMPRA]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de DT_DATA_COMPRA]"
+                      name="Cópia de DT_DATA_COMPRA"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Origem do Excel].Columns[DT_DATA_COMPRA]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de VL_TOTAL_COMPRA]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de VL_TOTAL_COMPRA]"
+                      name="Cópia de VL_TOTAL_COMPRA"
+                      precision="18"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Origem do Excel].Columns[VL_TOTAL_COMPRA]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de FK_FORMA_PAGAMENTO]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de FK_FORMA_PAGAMENTO]"
+                      name="Cópia de FK_FORMA_PAGAMENTO"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Origem do Excel].Columns[FK_FORMA_PAGAMENTO]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de FK_CLIENTE]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de FK_CLIENTE]"
+                      name="Cópia de FK_CLIENTE"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Origem do Excel].Columns[FK_CLIENTE]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Outputs[Saída de Erro de Conversão de Dados]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Saída de Erro de Conversão de Dados"
+                  synchronousInputId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Inputs[Entrada de Conversão de Dados]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Outputs[Saída de Erro de Conversão de Dados].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Outputs[Saída de Erro de Conversão de Dados].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Outputs[Saída de Erro de Conversão de Dados].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Outputs[Saída de Erro de Conversão de Dados].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\CARGA_NOTA_FISCAL\Dimensão de Alteração Lenta"
+              componentClassID="Microsoft.SCD"
+              contactInfo="Dimensão de Alteração Lenta;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;3"
+              description="Atualiza uma dimensão de data warehouse do SQL Server Analysis Services. Atualize registros da dimensão que já estejam presentes e insira os registros que não estão. Por exemplo, atualize a tabela DimProduct do banco de dados OLAP AdventureWorksDW com dados da tabela Products do banco de dados OLTP AdventureWorks."
+              name="Dimensão de Alteração Lenta"
+              version="3">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Especifica a instrução SELECT usada para criar um conjunto de linhas de esquema."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT [DT_DATA_COMPRA], [FK_CLIENTE], [FK_FORMA_PAGAMENTO], [PK_NOTA], [VL_TOTAL_COMPRA] FROM [dbo].[NOTA_FISCAL]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica a cláusula WHERE na instrução SELECT que seleciona a linha atual entre as linhas com chaves de negócios idênticas."
+                  name="CurrentRowWhere"></property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se as atualizações de atributo de histórico são direcionadas para a saída de transformação para atualizações de atributo de alteração."
+                  name="UpdateChangingAttributeHistory">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se a transformação falhará quando as colunas com atributos fixos contiverem alterações."
+                  name="FailOnFixedAttributeChange">false</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica o nome da coluna para o membro inferido."
+                  name="InferredMemberIndicator"></property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se as atualizações de membro inferido são detectadas."
+                  name="EnableInferredMember">true</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se a transformação falhará quando uma pesquisa de registro existente falhar."
+                  name="FailOnLookupFailure">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica que todas as linhas na entrada são novas ou a transformação detecta o tipo de alteração."
+                  name="IncomingRowChangeType"
+                  typeConverter="IncomingRowChangeType">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\CARGA_NOTA_FISCAL\Dimensão de Alteração Lenta.Connections[LookupConnection]"
+                  connectionManagerID="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_OLTP]"
+                  connectionManagerRefId="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_OLTP]"
+                  description="Define a conexão a ser usada para pesquisas na tabela de dimensão"
+                  name="LookupConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\CARGA_NOTA_FISCAL\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta]"
+                  name="Entrada de Dimensão de Alteração Lenta">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].Columns[Cópia de DT_DATA_COMPRA]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Cópia de DT_DATA_COMPRA"
+                      externalMetadataColumnId="Package\CARGA_NOTA_FISCAL\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[DT_DATA_COMPRA]"
+                      lineageId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de DT_DATA_COMPRA]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].Columns[Cópia de FK_CLIENTE]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de FK_CLIENTE"
+                      externalMetadataColumnId="Package\CARGA_NOTA_FISCAL\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[FK_CLIENTE]"
+                      lineageId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de FK_CLIENTE]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].Columns[Cópia de FK_FORMA_PAGAMENTO]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de FK_FORMA_PAGAMENTO"
+                      externalMetadataColumnId="Package\CARGA_NOTA_FISCAL\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[FK_FORMA_PAGAMENTO]"
+                      lineageId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de FK_FORMA_PAGAMENTO]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].Columns[Cópia de PK_NOTA]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de PK_NOTA"
+                      externalMetadataColumnId="Package\CARGA_NOTA_FISCAL\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[PK_NOTA]"
+                      lineageId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de PK_NOTA]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].Columns[Cópia de VL_TOTAL_COMPRA]"
+                      cachedDataType="numeric"
+                      cachedName="Cópia de VL_TOTAL_COMPRA"
+                      cachedPrecision="18"
+                      externalMetadataColumnId="Package\CARGA_NOTA_FISCAL\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[VL_TOTAL_COMPRA]"
+                      lineageId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de VL_TOTAL_COMPRA]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[DT_DATA_COMPRA]"
+                      dataType="dbTimeStamp"
+                      name="DT_DATA_COMPRA" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[FK_CLIENTE]"
+                      dataType="i4"
+                      name="FK_CLIENTE" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[FK_FORMA_PAGAMENTO]"
+                      dataType="i4"
+                      name="FK_FORMA_PAGAMENTO" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[PK_NOTA]"
+                      dataType="i4"
+                      name="PK_NOTA" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[VL_TOTAL_COMPRA]"
+                      dataType="numeric"
+                      name="VL_TOTAL_COMPRA"
+                      precision="10"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\CARGA_NOTA_FISCAL\Dimensão de Alteração Lenta.Outputs[Saída Inalterada]"
+                  description="Linhas inalteradas"
+                  exclusionGroup="1"
+                  name="Saída Inalterada"
+                  synchronousInputId="Package\CARGA_NOTA_FISCAL\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\CARGA_NOTA_FISCAL\Dimensão de Alteração Lenta.Outputs[Nova Saída]"
+                  description="Novas linhas"
+                  exclusionGroup="1"
+                  name="Nova Saída"
+                  synchronousInputId="Package\CARGA_NOTA_FISCAL\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\CARGA_NOTA_FISCAL\Dimensão de Alteração Lenta.Outputs[Saída de Atributo Fixo]"
+                  description="Linhas com alterações em colunas marcadas com FixedAttribute"
+                  exclusionGroup="1"
+                  name="Saída de Atributo Fixo"
+                  synchronousInputId="Package\CARGA_NOTA_FISCAL\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\CARGA_NOTA_FISCAL\Dimensão de Alteração Lenta.Outputs[Saída de Atualizações de Atributo de Alteração]"
+                  description="Essas linhas contêm novas informações para as alterações da coluna ChangingAttribute (Type 1)"
+                  exclusionGroup="1"
+                  name="Saída de Atualizações de Atributo de Alteração"
+                  synchronousInputId="Package\CARGA_NOTA_FISCAL\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\CARGA_NOTA_FISCAL\Dimensão de Alteração Lenta.Outputs[Saída de Inserções de Atributo de Histórico]"
+                  description="O resultado de alterações de HistoricalAttribute (Type 2) nessas novas linhas"
+                  exclusionGroup="2"
+                  name="Saída de Inserções de Atributo de Histórico"
+                  synchronousInputId="Package\CARGA_NOTA_FISCAL\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\CARGA_NOTA_FISCAL\Dimensão de Alteração Lenta.Outputs[Saída de Atualizações de Membro Inferido]"
+                  description="Informações para atualizar a linha de dimensão inicial sem preenchimento"
+                  exclusionGroup="1"
+                  name="Saída de Atualizações de Membro Inferido"
+                  synchronousInputId="Package\CARGA_NOTA_FISCAL\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\CARGA_NOTA_FISCAL\Inserir Destino"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="Destino OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;4"
+              description="Destino OLE DB"
+              name="Inserir Destino"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="O tempo em segundos antes que um comando expire. Zero indica uma expiração infinita."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowset">[dbo].[NOTA_FISCAL_TESTE]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica a variável que contém o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="O comando SQL a ser executado."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forca o uso do valor da propriedade DefaultCodePage durante a descrição dos dados de caractere."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica o modo usado para acessar o banco de dados."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se os valores fornecidos para colunas de identidade serão copiados no destino. Se false, os valores para colunas de identidade serão gerados automaticamente no destino. Aplicável apenas se o carregamento rápido estiver ativado."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se as colunas que contêm null terão null inserido no destino. Se false, as colunas que contêm null terão seus valores padrão inseridos no destino. Aplicável apenas se o carregamento rápido estiver ativado."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica as opções a serem usadas com o carregamento rápido. Aplicável apenas se o carregamento rápido estiver ativado."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica quando confirmações são emitidas durante a inserção de dados. Um valor de 0 especifica que uma confirmação será emitida ao final da inserção de dados. Aplicável somente se o carregamento rápido estiver ativado."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\CARGA_NOTA_FISCAL\Inserir Destino.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_OLTP]"
+                  connectionManagerRefId="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_OLTP]"
+                  description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\CARGA_NOTA_FISCAL\Inserir Destino.Inputs[Entrada de Destino OLE DB]"
+                  errorOrTruncationOperation="Inserir"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de Destino OLE DB">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Inserir Destino.Inputs[Entrada de Destino OLE DB].Columns[Cópia de PK_NOTA]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de PK_NOTA"
+                      externalMetadataColumnId="Package\CARGA_NOTA_FISCAL\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[PK_NOTA]"
+                      lineageId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de PK_NOTA]" />
+                    <inputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Inserir Destino.Inputs[Entrada de Destino OLE DB].Columns[Cópia de DT_DATA_COMPRA]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Cópia de DT_DATA_COMPRA"
+                      externalMetadataColumnId="Package\CARGA_NOTA_FISCAL\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[DT_DATA_COMPRA]"
+                      lineageId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de DT_DATA_COMPRA]" />
+                    <inputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Inserir Destino.Inputs[Entrada de Destino OLE DB].Columns[Cópia de VL_TOTAL_COMPRA]"
+                      cachedDataType="numeric"
+                      cachedName="Cópia de VL_TOTAL_COMPRA"
+                      cachedPrecision="18"
+                      externalMetadataColumnId="Package\CARGA_NOTA_FISCAL\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[VL_TOTAL_COMPRA]"
+                      lineageId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de VL_TOTAL_COMPRA]" />
+                    <inputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Inserir Destino.Inputs[Entrada de Destino OLE DB].Columns[Cópia de FK_FORMA_PAGAMENTO]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de FK_FORMA_PAGAMENTO"
+                      externalMetadataColumnId="Package\CARGA_NOTA_FISCAL\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[FK_FORMA_PAGAMENTO]"
+                      lineageId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de FK_FORMA_PAGAMENTO]" />
+                    <inputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Inserir Destino.Inputs[Entrada de Destino OLE DB].Columns[Cópia de FK_CLIENTE]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de FK_CLIENTE"
+                      externalMetadataColumnId="Package\CARGA_NOTA_FISCAL\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[FK_CLIENTE]"
+                      lineageId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de FK_CLIENTE]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[PK_NOTA]"
+                      dataType="i4"
+                      name="PK_NOTA" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[DT_DATA_COMPRA]"
+                      dataType="dbTimeStamp"
+                      name="DT_DATA_COMPRA" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[VL_TOTAL_COMPRA]"
+                      dataType="numeric"
+                      name="VL_TOTAL_COMPRA"
+                      precision="10"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[FK_FORMA_PAGAMENTO]"
+                      dataType="i4"
+                      name="FK_FORMA_PAGAMENTO" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[FK_CLIENTE]"
+                      dataType="i4"
+                      name="FK_CLIENTE" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\CARGA_NOTA_FISCAL\Inserir Destino.Outputs[Saída de Erro de Destino OLE DB]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Saída de Erro de Destino OLE DB"
+                  synchronousInputId="Package\CARGA_NOTA_FISCAL\Inserir Destino.Inputs[Entrada de Destino OLE DB]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Inserir Destino.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CARGA_NOTA_FISCAL\Inserir Destino.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CARGA_NOTA_FISCAL\Inserir Destino.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CARGA_NOTA_FISCAL\Inserir Destino.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\CARGA_NOTA_FISCAL.Paths[Nova Saída]"
+              endId="Package\CARGA_NOTA_FISCAL\Inserir Destino.Inputs[Entrada de Destino OLE DB]"
+              name="Nova Saída"
+              startId="Package\CARGA_NOTA_FISCAL\Dimensão de Alteração Lenta.Outputs[Nova Saída]" />
+            <path
+              refId="Package\CARGA_NOTA_FISCAL.Paths[Saída de Atualizações de Atributo de Alteração]"
+              endId="Package\CARGA_NOTA_FISCAL\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB]"
+              name="Saída de Atualizações de Atributo de Alteração"
+              startId="Package\CARGA_NOTA_FISCAL\Dimensão de Alteração Lenta.Outputs[Saída de Atualizações de Atributo de Alteração]" />
+            <path
+              refId="Package\CARGA_NOTA_FISCAL.Paths[Saída de Atualizações de Membro Inferido]"
+              endId="Package\CARGA_NOTA_FISCAL\Comando OLE DB.Inputs[Entrada de Comando OLE DB]"
+              name="Saída de Atualizações de Membro Inferido"
+              startId="Package\CARGA_NOTA_FISCAL\Dimensão de Alteração Lenta.Outputs[Saída de Atualizações de Membro Inferido]" />
+            <path
+              refId="Package\CARGA_NOTA_FISCAL.Paths[Saída de Conversão de Dados]"
+              endId="Package\CARGA_NOTA_FISCAL\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta]"
+              name="Saída de Conversão de Dados"
+              startId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Outputs[Saída de Conversão de Dados]" />
+            <path
+              refId="Package\CARGA_NOTA_FISCAL.Paths[Saída de Origem do Excel]"
+              endId="Package\CARGA_NOTA_FISCAL\Conversão de Dados.Inputs[Entrada de Conversão de Dados]"
+              name="Saída de Origem do Excel"
+              startId="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL.Outputs[Saída de Origem do Excel]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Esta seção CDATA contém as informações de layout do pacote. A seção inclui informações como coordenadas (x,y), largura e altura.-->
+<!--Se você editar manualmente esta seção e cometer algum erro, poderá excluí-la. -->
+<!--O pacote ainda poderá ser carregado normalmente, mas as informações de layout anteriores serão perdidas e o designer reorganizará automaticamente os elementos na superfície de design.-->
+<Objects
+  Version="8">
+  <!--Cada nó abaixo conterá propriedades que não afetam o comportamento em tempo de execução.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="173.333333333334,42.6666666666667"
+          Id="Package\CARGA ITEM_NOTA"
+          TopLeft="306.874995427206,98.1166667480269" />
+        <NodeLayout
+          Size="185.333333333334,42.6666666666667"
+          Id="Package\CARGA_NOTA_FISCAL"
+          TopLeft="41.8749993760139,96.8499982681871" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\CARGA ITEM_NOTA">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="176,42.6666666666667"
+          Id="Package\CARGA ITEM_NOTA\Conversão de Dados"
+          TopLeft="209.166666666667,108.166666666667" />
+        <NodeLayout
+          Size="176,42.6666666666667"
+          Id="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA"
+          TopLeft="209.166666666667,5.49999999999993" />
+        <NodeLayout
+          Size="217.333333333334,42.6666666666667"
+          Id="Package\CARGA ITEM_NOTA\Dimensão de Alteração Lenta"
+          TopLeft="188.5,210.833333333333" />
+        <EdgeLayout
+          Id="Package\CARGA ITEM_NOTA.Paths[Saída de Origem do Excel]"
+          TopLeft="297.166666666667,48.1666666666666">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\CARGA ITEM_NOTA.Paths[Saída de Conversão de Dados]"
+          TopLeft="297.166666666667,150.833333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="149.333333333334,42.6666666666667"
+          Id="Package\CARGA ITEM_NOTA\Inserir Destino"
+          TopLeft="5.50000000000001,313.5" />
+        <EdgeLayout
+          Id="Package\CARGA ITEM_NOTA.Paths[Nova Saída]"
+          TopLeft="244.833333333333,253.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-164.666666666667,60.0000000000001"
+              Start="0,0"
+              End="-164.666666666667,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.4848484848485" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.4848484848485"
+                    Point2="0,20.4848484848485"
+                    Point3="-4,20.4848484848485" />
+                  <mssgle:LineSegment
+                    End="-160.666666666667,20.4848484848485" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-160.666666666667,20.4848484848485"
+                    Point2="-164.666666666667,20.4848484848485"
+                    Point3="-164.666666666667,24.4848484848485" />
+                  <mssgle:LineSegment
+                    End="-164.666666666667,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-107.326692708333,25.4848484848485,49.98671875,10.3349609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="162.666666666667,42.6666666666667"
+          Id="Package\CARGA ITEM_NOTA\Comando OLE DB"
+          TopLeft="215.833333333333,313.5" />
+        <EdgeLayout
+          Id="Package\CARGA ITEM_NOTA.Paths[Saída de Atualizações de Membro Inferido]"
+          TopLeft="297.166666666667,253.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-93.5976953125,20.1254882812501,187.195390625,12.2490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="172,42.6666666666667"
+          Id="Package\CARGA ITEM_NOTA\Comando OLE DB 1"
+          TopLeft="439.166666666667,313.5" />
+        <EdgeLayout
+          Id="Package\CARGA ITEM_NOTA.Paths[Saída de Atualizações de Atributo de Alteração]"
+          TopLeft="349.5,253.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="175.666666666667,60.0000000000001"
+              Start="0,0"
+              End="175.666666666667,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.4848484848485" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.4848484848485"
+                    Point2="0,20.4848484848485"
+                    Point3="4,20.4848484848485" />
+                  <mssgle:LineSegment
+                    End="171.666666666667,20.4848484848485" />
+                  <mssgle:CubicBezierSegment
+                    Point1="171.666666666667,20.4848484848485"
+                    Point2="175.666666666667,20.4848484848485"
+                    Point3="175.666666666667,24.4848484848485" />
+                  <mssgle:LineSegment
+                    End="175.666666666667,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-15.5293619791667,25.4848484848485,206.725390625,12.2490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\CARGA ITEM_NOTA\CARGA_ITEM_NOTA">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\CARGA ITEM_NOTA\Dimensão de Alteração Lenta">
+    <Properties>
+      <Property>
+        <Name>SCDMetadata</Name>
+        <Value
+          type="q2:string">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SCDWizardMetadata xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionID&gt;{7A6216A4-13B9-4238-9A80-C59C1CE25B98}&lt;/ConnectionID&gt;
+  &lt;TableName&gt;[dbo].[ITEM_NOTA_TESTE]&lt;/TableName&gt;
+  &lt;InputToColumnsCollection&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Conversão de Dados.Saídas[Saída de Conversão de Dados].Colunas[Cópia de FK_CODIGO]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;FK_CODIGO&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Conversão de Dados.Saídas[Saída de Conversão de Dados].Colunas[Cópia de FK_NOTA]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;FK_NOTA&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Conversão de Dados.Saídas[Saída de Conversão de Dados].Colunas[Cópia de FK_PRECO]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;FK_PRECO&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Conversão de Dados.Saídas[Saída de Conversão de Dados].Colunas[Cópia de PK_ITEM_NOTA]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;PK_ITEM_NOTA&lt;/ColumnName&gt;
+      &lt;KeyType&gt;BusinessKey&lt;/KeyType&gt;
+      &lt;ChangeType&gt;None&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Conversão de Dados.Saídas[Saída de Conversão de Dados].Colunas[Cópia de QT_QUANTIDADE]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;QT_QUANTIDADE&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Conversão de Dados.Saídas[Saída de Conversão de Dados].Colunas[Cópia de VL_TOTAL_COMPRA]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;VL_TOTAL_COMPRA&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+  &lt;/InputToColumnsCollection&gt;
+  &lt;GeneratedComponentsIdentificationStrings&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;Inserir Destino&lt;/anyType&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;Comando OLE DB&lt;/anyType&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;Comando OLE DB 1&lt;/anyType&gt;
+  &lt;/GeneratedComponentsIdentificationStrings&gt;
+  &lt;FailFixedAttribute&gt;false&lt;/FailFixedAttribute&gt;
+  &lt;FailChangeAttribute&gt;false&lt;/FailChangeAttribute&gt;
+  &lt;UseStartEndDate&gt;false&lt;/UseStartEndDate&gt;
+  &lt;CurrentIndicatorColumn /&gt;
+  &lt;InferredIndicatorColumn /&gt;
+  &lt;ValueCurrent /&gt;
+  &lt;ValueExpired /&gt;
+  &lt;StartDateColumn /&gt;
+  &lt;EndDateColumn /&gt;
+  &lt;DateVariable /&gt;
+  &lt;EnableInferredSupport&gt;true&lt;/EnableInferredSupport&gt;
+&lt;/SCDWizardMetadata&gt;</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\CARGA_NOTA_FISCAL">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="162.666666666667,42.6666666666667"
+          Id="Package\CARGA_NOTA_FISCAL\Comando OLE DB"
+          TopLeft="215.833333333333,313.5" />
+        <NodeLayout
+          Size="217.333333333334,42.6666666666667"
+          Id="Package\CARGA_NOTA_FISCAL\Dimensão de Alteração Lenta"
+          TopLeft="188.5,210.833333333334" />
+        <NodeLayout
+          Size="176,42.6666666666667"
+          Id="Package\CARGA_NOTA_FISCAL\Conversão de Dados"
+          TopLeft="209.166666666667,108.166666666667" />
+        <NodeLayout
+          Size="172,42.6666666666667"
+          Id="Package\CARGA_NOTA_FISCAL\Comando OLE DB 1"
+          TopLeft="439.166666666667,313.5" />
+        <NodeLayout
+          Size="149.333333333334,42.6666666666667"
+          Id="Package\CARGA_NOTA_FISCAL\Inserir Destino"
+          TopLeft="5.49999999999996,313.5" />
+        <NodeLayout
+          Size="185.333333333334,42.6666666666667"
+          Id="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL"
+          TopLeft="204.5,5.50000000000004" />
+        <EdgeLayout
+          Id="Package\CARGA_NOTA_FISCAL.Paths[Saída de Atualizações de Atributo de Alteração]"
+          TopLeft="349.5,253.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="175.666666666667,60"
+              Start="0,0"
+              End="175.666666666667,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.4848484848485" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.4848484848485"
+                    Point2="0,20.4848484848485"
+                    Point3="4,20.4848484848485" />
+                  <mssgle:LineSegment
+                    End="171.666666666667,20.4848484848485" />
+                  <mssgle:CubicBezierSegment
+                    Point1="171.666666666667,20.4848484848485"
+                    Point2="175.666666666667,20.4848484848485"
+                    Point3="175.666666666667,24.4848484848485" />
+                  <mssgle:LineSegment
+                    End="175.666666666667,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-15.5293619791666,25.4848484848485,206.725390625,12.2490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\CARGA_NOTA_FISCAL.Paths[Nova Saída]"
+          TopLeft="244.833333333333,253.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-164.666666666667,60.0000000000001"
+              Start="0,0"
+              End="-164.666666666667,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.4848484848485" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.4848484848485"
+                    Point2="0,20.4848484848485"
+                    Point3="-4,20.4848484848485" />
+                  <mssgle:LineSegment
+                    End="-160.666666666667,20.4848484848485" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-160.666666666667,20.4848484848485"
+                    Point2="-164.666666666667,20.4848484848485"
+                    Point3="-164.666666666667,24.4848484848485" />
+                  <mssgle:LineSegment
+                    End="-164.666666666667,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-107.326692708333,25.4848484848485,49.98671875,10.3349609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\CARGA_NOTA_FISCAL.Paths[Saída de Origem do Excel]"
+          TopLeft="297.166666666667,48.1666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\CARGA_NOTA_FISCAL.Paths[Saída de Conversão de Dados]"
+          TopLeft="297.166666666667,150.833333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\CARGA_NOTA_FISCAL.Paths[Saída de Atualizações de Membro Inferido]"
+          TopLeft="297.166666666667,253.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-93.5976953125,20.1254882812501,187.195390625,12.2490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\CARGA_NOTA_FISCAL\Dimensão de Alteração Lenta">
+    <Properties>
+      <Property>
+        <Name>SCDMetadata</Name>
+        <Value
+          type="q2:string">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SCDWizardMetadata xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionID&gt;{7A6216A4-13B9-4238-9A80-C59C1CE25B98}&lt;/ConnectionID&gt;
+  &lt;TableName&gt;[dbo].[NOTA_FISCAL]&lt;/TableName&gt;
+  &lt;InputToColumnsCollection&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Conversão de Dados.Saídas[Saída de Conversão de Dados].Colunas[Cópia de DT_DATA_COMPRA]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;DT_DATA_COMPRA&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Conversão de Dados.Saídas[Saída de Conversão de Dados].Colunas[Cópia de FK_CLIENTE]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;FK_CLIENTE&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Conversão de Dados.Saídas[Saída de Conversão de Dados].Colunas[Cópia de FK_FORMA_PAGAMENTO]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;FK_FORMA_PAGAMENTO&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Conversão de Dados.Saídas[Saída de Conversão de Dados].Colunas[Cópia de PK_NOTA]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;PK_NOTA&lt;/ColumnName&gt;
+      &lt;KeyType&gt;BusinessKey&lt;/KeyType&gt;
+      &lt;ChangeType&gt;None&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Conversão de Dados.Saídas[Saída de Conversão de Dados].Colunas[Cópia de VL_TOTAL_COMPRA]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;VL_TOTAL_COMPRA&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+  &lt;/InputToColumnsCollection&gt;
+  &lt;GeneratedComponentsIdentificationStrings&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;Inserir Destino&lt;/anyType&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;Comando OLE DB&lt;/anyType&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;Comando OLE DB 1&lt;/anyType&gt;
+  &lt;/GeneratedComponentsIdentificationStrings&gt;
+  &lt;FailFixedAttribute&gt;false&lt;/FailFixedAttribute&gt;
+  &lt;FailChangeAttribute&gt;false&lt;/FailChangeAttribute&gt;
+  &lt;UseStartEndDate&gt;false&lt;/UseStartEndDate&gt;
+  &lt;CurrentIndicatorColumn /&gt;
+  &lt;InferredIndicatorColumn /&gt;
+  &lt;ValueCurrent /&gt;
+  &lt;ValueExpired /&gt;
+  &lt;StartDateColumn /&gt;
+  &lt;EndDateColumn /&gt;
+  &lt;DateVariable /&gt;
+  &lt;EnableInferredSupport&gt;true&lt;/EnableInferredSupport&gt;
+&lt;/SCDWizardMetadata&gt;</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\CARGA_NOTA_FISCAL\Inserir Destino">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\CARGA_NOTA_FISCAL\CARGA_NOTA_FISCAL">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

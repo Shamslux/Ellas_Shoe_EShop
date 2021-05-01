@@ -1,0 +1,842 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/6/2021 11:59:21 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SHAMSLUX-PC"
+  DTS:CreatorName="SHAMSLUX-PC\João Paulo Müller"
+  DTS:DTSID="{3F99317D-DC21-4DDD-B682-A9B1DFDB61E0}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.132"
+  DTS:LocaleID="1046"
+  DTS:ObjectName="CARGA_TB_DIM_CLIENTE"
+  DTS:PackageType="5"
+  DTS:VersionBuild="2"
+  DTS:VersionGUID="{06F11BC8-2AAE-4F40-8F8F-2F006C79A425}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_DW]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{2D1BCF91-AE2D-4CD1-887A-F8BF8A4A2827}"
+      DTS:ObjectName="SHAMSLUX-PC.ELLAS_DW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SHAMSLUX-PC;Initial Catalog=ELLAS_DW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_STAGE]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{7B923048-958E-4CFF-93B6-AA149E29B17C}"
+      DTS:ObjectName="SHAMSLUX-PC.ELLAS_STAGE">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SHAMSLUX-PC;Initial Catalog=ELLAS_STAGE;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Tarefa Fluxo de Dados"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarefa Fluxo de Dados"
+      DTS:DTSID="{BEF98DF9-AC88-4223-A559-480179266884}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Tarefa Fluxo de Dados"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO"
+              componentClassID="Microsoft.SQLServerDestination"
+              contactInfo="Destino do SQL Server;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;5"
+              description="Destino do SQL Server"
+              name="DESTINO DW TB_DIM_PRODUTO"
+              version="5">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forca o uso do valor da propriedade DefaultCodePage durante a descrição dos dados de caractere."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.String"
+                  description="O nome do objeto de banco de dados no qual copiar dados."
+                  expressionType="Notify"
+                  name="BulkInsertTableName">[dbo].[TB_DIM_CLIENTE]</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica que qualquer restrição no objeto de destino será verificada durante a operação de cópia de dados. Corresponde a opção de inserção em massa CHECK_CONSTRAINTS."
+                  name="BulkInsertCheckConstraints">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica o número da primeira linha a ser copiada. Corresponde à opção de inserção em massa FIRSTROW."
+                  expressionType="Notify"
+                  name="BulkInsertFirstRow">-1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica que qualquer disparador de inserção definido no objeto de destino será executado durante a cópia de dados. Corresponde à opção de inserção em massa FIRE_TRIGGERS."
+                  name="BulkInsertFireTriggers">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se os valores fornecidos para colunas de identidade serão copiados no destino. Se false, os valores para colunas de identidade serão gerados automaticamente no destino. Corresponde à opção de inserção em massa KEEPIDENTITY."
+                  name="BulkInsertKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se as colunas que contêm null terão null copiado no destino. Se false, as colunas que contêm null terão seus valores padrão inseridos no destino. Aplicável somente se o carregamento rápido estiver ativado."
+                  name="BulkInsertKeepNulls">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica o número da última linha a ser copiada. Corresponde à opção de inserção em massa LASTROW."
+                  expressionType="Notify"
+                  name="BulkInsertLastRow">-1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica o número máximo de erros de sintaxe e erros de compilação que podem ocorrer antes do cancelamento da operação de cópia de dados. Cada linha que não puder ser copiada será ignorada e contada como um erro. Corresponde à opção de inserção em massa MAXERRORS."
+                  name="BulkInsertMaxErrors">-1</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica como os dados a serem copiados estão classificados. Corresponde à opção de inserção em massa ORDER."
+                  expressionType="Notify"
+                  name="BulkInsertOrder"></property>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica que um bloqueio de nível de tabela é adquirido para a duração da operação de cópia de dados. Corresponde à opção de inserção em massa TABLOCK."
+                  name="BulkInsertTablock">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica a quantidade de tempo em segundos que o adaptador de Destino SQL aguardará antes de encerrar se não houver dados disponíveis para inserção. Um valor de tempo limite de 0 significa que o adaptador de Destino SQL não terá tempo limite."
+                  expressionType="Notify"
+                  name="Timeout">30</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica quando confirmações são emitidas durante a inserção de dados. Um valor de 0 especifica que uma confirmação será emitida ao final da inserção dos dados."
+                  name="MaxInsertCommitSize">0</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_DW]"
+                  connectionManagerRefId="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_DW]"
+                  description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server]"
+                  hasSideEffects="true"
+                  name="Entrada de Destino do SQL Server">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server].Columns[NM_NOME]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="150"
+                      cachedName="NM_NOME"
+                      externalMetadataColumnId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server].ExternalColumns[NM_NOME]"
+                      lineageId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].Columns[NM_NOME]" />
+                    <inputColumn
+                      refId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server].Columns[PK_CLIENTE]"
+                      cachedDataType="i4"
+                      cachedName="PK_CLIENTE"
+                      externalMetadataColumnId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server].ExternalColumns[NK_CLIENTE]"
+                      lineageId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].Columns[PK_CLIENTE]" />
+                    <inputColumn
+                      refId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server].Columns[NM_SEXO]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="NM_SEXO"
+                      externalMetadataColumnId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server].ExternalColumns[NM_SEXO]"
+                      lineageId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].Columns[NM_SEXO]" />
+                    <inputColumn
+                      refId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server].Columns[QT_IDADE]"
+                      cachedDataType="i4"
+                      cachedName="QT_IDADE"
+                      externalMetadataColumnId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server].ExternalColumns[QT_IDADE]"
+                      lineageId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].Columns[QT_IDADE]" />
+                    <inputColumn
+                      refId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server].Columns[TX_EMAIL]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="150"
+                      cachedName="TX_EMAIL"
+                      externalMetadataColumnId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server].ExternalColumns[TX_EMAIL]"
+                      lineageId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].Columns[TX_EMAIL]" />
+                    <inputColumn
+                      refId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server].Columns[NM_CPF]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="NM_CPF"
+                      externalMetadataColumnId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server].ExternalColumns[NM_CPF]"
+                      lineageId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].Columns[NM_CPF]" />
+                    <inputColumn
+                      refId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server].Columns[NM_RG]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="NM_RG"
+                      externalMetadataColumnId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server].ExternalColumns[NM_RG]"
+                      lineageId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].Columns[NM_RG]" />
+                    <inputColumn
+                      refId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server].Columns[NM_RUA]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="150"
+                      cachedName="NM_RUA"
+                      externalMetadataColumnId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server].ExternalColumns[NM_RUA]"
+                      lineageId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].Columns[NM_RUA]" />
+                    <inputColumn
+                      refId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server].Columns[NM_BAIRRO]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="150"
+                      cachedName="NM_BAIRRO"
+                      externalMetadataColumnId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server].ExternalColumns[NM_BAIRRO]"
+                      lineageId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].Columns[NM_BAIRRO]" />
+                    <inputColumn
+                      refId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server].Columns[NM_CIDADE]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="150"
+                      cachedName="NM_CIDADE"
+                      externalMetadataColumnId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server].ExternalColumns[NM_CIDADE]"
+                      lineageId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].Columns[NM_CIDADE]" />
+                    <inputColumn
+                      refId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server].Columns[NM_ESTADO]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="NM_ESTADO"
+                      externalMetadataColumnId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server].ExternalColumns[NM_ESTADO]"
+                      lineageId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].Columns[NM_ESTADO]" />
+                    <inputColumn
+                      refId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server].Columns[NM_REGIAO]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="NM_REGIAO"
+                      externalMetadataColumnId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server].ExternalColumns[NM_REGIAO]"
+                      lineageId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].Columns[NM_REGIAO]" />
+                    <inputColumn
+                      refId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server].Columns[NM_CEP]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="NM_CEP"
+                      externalMetadataColumnId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server].ExternalColumns[NM_CEP]"
+                      lineageId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].Columns[NM_CEP]" />
+                    <inputColumn
+                      refId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server].Columns[NM_FAIXA_ETARIA]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="NM_FAIXA_ETARIA"
+                      externalMetadataColumnId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server].ExternalColumns[NM_FAIXA_ETARIA]"
+                      lineageId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].Columns[NM_FAIXA_ETARIA]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server].ExternalColumns[NM_NOME]"
+                      codePage="1252"
+                      dataType="str"
+                      length="150"
+                      name="NM_NOME" />
+                    <externalMetadataColumn
+                      refId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server].ExternalColumns[SK_CLIENTE]"
+                      dataType="i4"
+                      name="SK_CLIENTE" />
+                    <externalMetadataColumn
+                      refId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server].ExternalColumns[NK_CLIENTE]"
+                      dataType="i4"
+                      name="NK_CLIENTE" />
+                    <externalMetadataColumn
+                      refId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server].ExternalColumns[NM_SEXO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="NM_SEXO" />
+                    <externalMetadataColumn
+                      refId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server].ExternalColumns[QT_IDADE]"
+                      dataType="i4"
+                      name="QT_IDADE" />
+                    <externalMetadataColumn
+                      refId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server].ExternalColumns[TX_EMAIL]"
+                      codePage="1252"
+                      dataType="str"
+                      length="150"
+                      name="TX_EMAIL" />
+                    <externalMetadataColumn
+                      refId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server].ExternalColumns[NM_CPF]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="NM_CPF" />
+                    <externalMetadataColumn
+                      refId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server].ExternalColumns[NM_RG]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="NM_RG" />
+                    <externalMetadataColumn
+                      refId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server].ExternalColumns[NM_RUA]"
+                      codePage="1252"
+                      dataType="str"
+                      length="150"
+                      name="NM_RUA" />
+                    <externalMetadataColumn
+                      refId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server].ExternalColumns[NM_BAIRRO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="150"
+                      name="NM_BAIRRO" />
+                    <externalMetadataColumn
+                      refId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server].ExternalColumns[NM_CIDADE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="150"
+                      name="NM_CIDADE" />
+                    <externalMetadataColumn
+                      refId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server].ExternalColumns[NM_ESTADO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="NM_ESTADO" />
+                    <externalMetadataColumn
+                      refId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server].ExternalColumns[NM_REGIAO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="NM_REGIAO" />
+                    <externalMetadataColumn
+                      refId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server].ExternalColumns[NM_CEP]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="NM_CEP" />
+                    <externalMetadataColumn
+                      refId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server].ExternalColumns[NM_FAIXA_ETARIA]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="NM_FAIXA_ETARIA" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="Origem OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;7"
+              description="Origem OLE DB"
+              name="ORIGEM STAGE ST_CLIENTE"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="O tempo em segundos antes que um comando expire. Zero indica uma expiração infinita."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowset">[dbo].[ST_CLIENTE]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica a variável que contém o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="O comando SQL a ser executado."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="A variável que contém o comando SQL a ser executado."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forca o uso do valor da propriedade DefaultCodePage durante a descrição dos dados de caractere."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica o modo usado para acessar o banco de dados."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="Os mapeamentos entre os parâmetros no comando SQL e as variáveis."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_STAGE]"
+                  connectionManagerRefId="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_STAGE]"
+                  description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB]"
+                  name="Saída de Origem OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].Columns[NM_NOME]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].ExternalColumns[NM_NOME]"
+                      length="150"
+                      lineageId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].Columns[NM_NOME]"
+                      name="NM_NOME"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].Columns[PK_CLIENTE]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].ExternalColumns[PK_CLIENTE]"
+                      lineageId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].Columns[PK_CLIENTE]"
+                      name="PK_CLIENTE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].Columns[NM_SEXO]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].ExternalColumns[NM_SEXO]"
+                      length="50"
+                      lineageId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].Columns[NM_SEXO]"
+                      name="NM_SEXO"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].Columns[QT_IDADE]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].ExternalColumns[QT_IDADE]"
+                      lineageId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].Columns[QT_IDADE]"
+                      name="QT_IDADE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].Columns[TX_EMAIL]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].ExternalColumns[TX_EMAIL]"
+                      length="150"
+                      lineageId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].Columns[TX_EMAIL]"
+                      name="TX_EMAIL"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].Columns[NM_CPF]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].ExternalColumns[NM_CPF]"
+                      length="50"
+                      lineageId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].Columns[NM_CPF]"
+                      name="NM_CPF"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].Columns[NM_RG]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].ExternalColumns[NM_RG]"
+                      length="50"
+                      lineageId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].Columns[NM_RG]"
+                      name="NM_RG"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].Columns[NM_RUA]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].ExternalColumns[NM_RUA]"
+                      length="150"
+                      lineageId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].Columns[NM_RUA]"
+                      name="NM_RUA"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].Columns[NM_BAIRRO]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].ExternalColumns[NM_BAIRRO]"
+                      length="150"
+                      lineageId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].Columns[NM_BAIRRO]"
+                      name="NM_BAIRRO"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].Columns[NM_CIDADE]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].ExternalColumns[NM_CIDADE]"
+                      length="150"
+                      lineageId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].Columns[NM_CIDADE]"
+                      name="NM_CIDADE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].Columns[NM_ESTADO]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].ExternalColumns[NM_ESTADO]"
+                      length="50"
+                      lineageId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].Columns[NM_ESTADO]"
+                      name="NM_ESTADO"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].Columns[NM_REGIAO]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].ExternalColumns[NM_REGIAO]"
+                      length="50"
+                      lineageId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].Columns[NM_REGIAO]"
+                      name="NM_REGIAO"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].Columns[NM_CEP]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].ExternalColumns[NM_CEP]"
+                      length="50"
+                      lineageId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].Columns[NM_CEP]"
+                      name="NM_CEP"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].Columns[NM_FAIXA_ETARIA]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].ExternalColumns[NM_FAIXA_ETARIA]"
+                      length="50"
+                      lineageId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].Columns[NM_FAIXA_ETARIA]"
+                      name="NM_FAIXA_ETARIA"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].ExternalColumns[NM_NOME]"
+                      codePage="1252"
+                      dataType="str"
+                      length="150"
+                      name="NM_NOME" />
+                    <externalMetadataColumn
+                      refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].ExternalColumns[PK_CLIENTE]"
+                      dataType="i4"
+                      name="PK_CLIENTE" />
+                    <externalMetadataColumn
+                      refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].ExternalColumns[NM_SEXO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="NM_SEXO" />
+                    <externalMetadataColumn
+                      refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].ExternalColumns[QT_IDADE]"
+                      dataType="i4"
+                      name="QT_IDADE" />
+                    <externalMetadataColumn
+                      refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].ExternalColumns[TX_EMAIL]"
+                      codePage="1252"
+                      dataType="str"
+                      length="150"
+                      name="TX_EMAIL" />
+                    <externalMetadataColumn
+                      refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].ExternalColumns[NM_CPF]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="NM_CPF" />
+                    <externalMetadataColumn
+                      refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].ExternalColumns[NM_RG]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="NM_RG" />
+                    <externalMetadataColumn
+                      refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].ExternalColumns[NM_RUA]"
+                      codePage="1252"
+                      dataType="str"
+                      length="150"
+                      name="NM_RUA" />
+                    <externalMetadataColumn
+                      refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].ExternalColumns[NM_BAIRRO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="150"
+                      name="NM_BAIRRO" />
+                    <externalMetadataColumn
+                      refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].ExternalColumns[NM_CIDADE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="150"
+                      name="NM_CIDADE" />
+                    <externalMetadataColumn
+                      refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].ExternalColumns[NM_ESTADO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="NM_ESTADO" />
+                    <externalMetadataColumn
+                      refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].ExternalColumns[NM_REGIAO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="NM_REGIAO" />
+                    <externalMetadataColumn
+                      refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].ExternalColumns[NM_CEP]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="NM_CEP" />
+                    <externalMetadataColumn
+                      refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB].ExternalColumns[NM_FAIXA_ETARIA]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="NM_FAIXA_ETARIA" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Erro de Origem OLE DB]"
+                  isErrorOut="true"
+                  name="Saída de Erro de Origem OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Erro de Origem OLE DB].Columns[PK_CLIENTE]"
+                      dataType="i4"
+                      lineageId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Erro de Origem OLE DB].Columns[PK_CLIENTE]"
+                      name="PK_CLIENTE" />
+                    <outputColumn
+                      refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Erro de Origem OLE DB].Columns[NM_NOME]"
+                      codePage="1252"
+                      dataType="str"
+                      length="150"
+                      lineageId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Erro de Origem OLE DB].Columns[NM_NOME]"
+                      name="NM_NOME" />
+                    <outputColumn
+                      refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Erro de Origem OLE DB].Columns[NM_SEXO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Erro de Origem OLE DB].Columns[NM_SEXO]"
+                      name="NM_SEXO" />
+                    <outputColumn
+                      refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Erro de Origem OLE DB].Columns[QT_IDADE]"
+                      dataType="i4"
+                      lineageId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Erro de Origem OLE DB].Columns[QT_IDADE]"
+                      name="QT_IDADE" />
+                    <outputColumn
+                      refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Erro de Origem OLE DB].Columns[TX_EMAIL]"
+                      codePage="1252"
+                      dataType="str"
+                      length="150"
+                      lineageId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Erro de Origem OLE DB].Columns[TX_EMAIL]"
+                      name="TX_EMAIL" />
+                    <outputColumn
+                      refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Erro de Origem OLE DB].Columns[NM_CPF]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Erro de Origem OLE DB].Columns[NM_CPF]"
+                      name="NM_CPF" />
+                    <outputColumn
+                      refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Erro de Origem OLE DB].Columns[NM_RG]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Erro de Origem OLE DB].Columns[NM_RG]"
+                      name="NM_RG" />
+                    <outputColumn
+                      refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Erro de Origem OLE DB].Columns[NM_RUA]"
+                      codePage="1252"
+                      dataType="str"
+                      length="150"
+                      lineageId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Erro de Origem OLE DB].Columns[NM_RUA]"
+                      name="NM_RUA" />
+                    <outputColumn
+                      refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Erro de Origem OLE DB].Columns[NM_BAIRRO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="150"
+                      lineageId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Erro de Origem OLE DB].Columns[NM_BAIRRO]"
+                      name="NM_BAIRRO" />
+                    <outputColumn
+                      refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Erro de Origem OLE DB].Columns[NM_CIDADE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="150"
+                      lineageId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Erro de Origem OLE DB].Columns[NM_CIDADE]"
+                      name="NM_CIDADE" />
+                    <outputColumn
+                      refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Erro de Origem OLE DB].Columns[NM_ESTADO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Erro de Origem OLE DB].Columns[NM_ESTADO]"
+                      name="NM_ESTADO" />
+                    <outputColumn
+                      refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Erro de Origem OLE DB].Columns[NM_REGIAO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Erro de Origem OLE DB].Columns[NM_REGIAO]"
+                      name="NM_REGIAO" />
+                    <outputColumn
+                      refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Erro de Origem OLE DB].Columns[NM_CEP]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Erro de Origem OLE DB].Columns[NM_CEP]"
+                      name="NM_CEP" />
+                    <outputColumn
+                      refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Erro de Origem OLE DB].Columns[NM_FAIXA_ETARIA]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Erro de Origem OLE DB].Columns[NM_FAIXA_ETARIA]"
+                      name="NM_FAIXA_ETARIA" />
+                    <outputColumn
+                      refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Erro de Origem OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Erro de Origem OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Erro de Origem OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Erro de Origem OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Tarefa Fluxo de Dados.Paths[Saída de Origem OLE DB]"
+              endId="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO.Inputs[Entrada de Destino do SQL Server]"
+              name="Saída de Origem OLE DB"
+              startId="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE.Outputs[Saída de Origem OLE DB]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Esta seção CDATA contém as informações de layout do pacote. A seção inclui informações como coordenadas (x,y), largura e altura.-->
+<!--Se você editar manualmente esta seção e cometer algum erro, poderá excluí-la. -->
+<!--O pacote ainda poderá ser carregado normalmente, mas as informações de layout anteriores serão perdidas e o designer reorganizará automaticamente os elementos na superfície de design.-->
+<Objects
+  Version="8">
+  <!--Cada nó abaixo conterá propriedades que não afetam o comportamento em tempo de execução.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="185.333333333334,42.6666666666667"
+          Id="Package\Tarefa Fluxo de Dados"
+          TopLeft="46.874999301508,39.6499992910028" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Tarefa Fluxo de Dados">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="216,42.6666666666667"
+          Id="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE"
+          TopLeft="53.7499991990626,12.9999997675419" />
+        <NodeLayout
+          Size="238.666666666667,42"
+          Id="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO"
+          TopLeft="49.5833325944842,101.849998190701" />
+        <EdgeLayout
+          Id="Package\Tarefa Fluxo de Dados.Paths[Saída de Origem OLE DB]"
+          TopLeft="165.33333256344,55.6666664342086">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,46.1833317564924"
+              Start="0,0"
+              End="0,38.6833317564924">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,38.6833317564924" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Tarefa Fluxo de Dados\DESTINO DW TB_DIM_PRODUTO">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Tarefa Fluxo de Dados\ORIGEM STAGE ST_CLIENTE">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

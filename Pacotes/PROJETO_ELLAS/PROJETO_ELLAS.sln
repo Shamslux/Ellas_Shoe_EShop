@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "ETL_OLTP", "ETL_OLTP\ETL_OLTP.dtproj", "{0915186B-06BA-4DFB-A32F-5B4EFC595C7A}"
+EndProject
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "ETL_STAGE", "ETL_STAGE\ETL_STAGE.dtproj", "{0F09DD0A-FC81-44AD-9117-5EAEF68B6F6B}"
+EndProject
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "ETL_DW", "ETL_DW\ETL_DW.dtproj", "{65975965-2108-4A13-8247-532B093ECCDE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0915186B-06BA-4DFB-A32F-5B4EFC595C7A}.Development|Default.ActiveCfg = Development
+		{0915186B-06BA-4DFB-A32F-5B4EFC595C7A}.Development|Default.Build.0 = Development
+		{0F09DD0A-FC81-44AD-9117-5EAEF68B6F6B}.Development|Default.ActiveCfg = Development
+		{0F09DD0A-FC81-44AD-9117-5EAEF68B6F6B}.Development|Default.Build.0 = Development
+		{65975965-2108-4A13-8247-532B093ECCDE}.Development|Default.ActiveCfg = Development
+		{65975965-2108-4A13-8247-532B093ECCDE}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8C982684-8C03-4FE4-A6F2-D1890F51FC0E}
+	EndGlobalSection
+EndGlobal

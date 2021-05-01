@@ -1,0 +1,1667 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/20/2021 10:28:41 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SHAMSLUX-PC"
+  DTS:CreatorName="SHAMSLUX-PC\João Paulo Müller"
+  DTS:DTSID="{BA88A152-262D-4DB6-B62E-F3938AF1F0EA}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.132"
+  DTS:LocaleID="1046"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="2"
+  DTS:VersionGUID="{88531220-4124-4055-A732-E7C3BD4A0DF7}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Gerenciador de Conexões do Excel]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{DED39D30-7BE4-4FCA-96C0-44EA766C9B0A}"
+      DTS:ObjectName="Gerenciador de Conexões do Excel">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.16.0;Data Source=C:\Users\João Paulo Müller\Documents\Projetos BI\Projeto E-Shop de Sapatilhas\Cargas\FRETE_CLIENTE (Responses).xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_OLTP]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{AF7CFE88-B6B1-4A41-AA55-A674D8360BD8}"
+      DTS:ObjectName="SHAMSLUX-PC.ELLAS_OLTP">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SHAMSLUX-PC;Initial Catalog=ELLAS_OLTP;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\CARGA FRETE_CLIENTE"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarefa Fluxo de Dados"
+      DTS:DTSID="{A6DB2D29-A325-4E3F-9E36-6A8B8654A5E3}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="CARGA FRETE_CLIENTE"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\CARGA FRETE_CLIENTE\Comando OLE DB"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="Comando OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;2"
+              description="Executa uma instrução SQL para cada linha em um fluxo de dados. Por exemplo, chame um procedimento armazenado 'new employee setup' para cada linha da tabela 'new employees'. Observação: a execução de uma instrução SQL para cada linha de um fluxo de dados grande pode demorar."
+              name="Comando OLE DB"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="O tempo em segundos antes que um comando expire. Zero indica uma expiração infinita."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="O comando SQL a ser executado."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE [dbo].[FRETE_CLIENTE] SET [FK_CLIENTE] = ?,[FK_NOTA] = ?,[NM_REGIAO] = ?,[NM_TRANSP] = ?,[QT_PRAZO_DIA] = ?,[VL_VALOR] = ? WHERE [PK_FRETE_C] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\CARGA FRETE_CLIENTE\Comando OLE DB.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_OLTP]"
+                  connectionManagerRefId="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_OLTP]"
+                  description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\CARGA FRETE_CLIENTE\Comando OLE DB.Inputs[Entrada de Comando OLE DB]"
+                  errorOrTruncationOperation="Execução de Comando"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de Comando OLE DB">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Comando OLE DB.Inputs[Entrada de Comando OLE DB].Columns[Cópia de FK_CLIENTE]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de FK_CLIENTE"
+                      externalMetadataColumnId="Package\CARGA FRETE_CLIENTE\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_0]"
+                      lineageId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de FK_CLIENTE]" />
+                    <inputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Comando OLE DB.Inputs[Entrada de Comando OLE DB].Columns[Cópia de FK_NOTA]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de FK_NOTA"
+                      externalMetadataColumnId="Package\CARGA FRETE_CLIENTE\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_1]"
+                      lineageId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de FK_NOTA]" />
+                    <inputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Comando OLE DB.Inputs[Entrada de Comando OLE DB].Columns[Cópia de NM_REGIAO]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Cópia de NM_REGIAO"
+                      externalMetadataColumnId="Package\CARGA FRETE_CLIENTE\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_2]"
+                      lineageId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_REGIAO]" />
+                    <inputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Comando OLE DB.Inputs[Entrada de Comando OLE DB].Columns[Cópia de NM_TRANSP]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="Cópia de NM_TRANSP"
+                      externalMetadataColumnId="Package\CARGA FRETE_CLIENTE\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_3]"
+                      lineageId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_TRANSP]" />
+                    <inputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Comando OLE DB.Inputs[Entrada de Comando OLE DB].Columns[Cópia de PK_FRETE_C]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de PK_FRETE_C"
+                      externalMetadataColumnId="Package\CARGA FRETE_CLIENTE\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_6]"
+                      lineageId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de PK_FRETE_C]" />
+                    <inputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Comando OLE DB.Inputs[Entrada de Comando OLE DB].Columns[Cópia de QT_PRAZO_DIAS]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de QT_PRAZO_DIAS"
+                      externalMetadataColumnId="Package\CARGA FRETE_CLIENTE\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_4]"
+                      lineageId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de QT_PRAZO_DIAS]" />
+                    <inputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Comando OLE DB.Inputs[Entrada de Comando OLE DB].Columns[Cópia de VL_VALOR]"
+                      cachedDataType="numeric"
+                      cachedName="Cópia de VL_VALOR"
+                      cachedPrecision="5"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\CARGA FRETE_CLIENTE\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_5]"
+                      lineageId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de VL_VALOR]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_0]"
+                      dataType="i4"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_1]"
+                      dataType="i4"
+                      name="Param_1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Param_2">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_3]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Param_3">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_4]"
+                      dataType="i4"
+                      name="Param_4">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_5]"
+                      dataType="numeric"
+                      name="Param_5"
+                      precision="10"
+                      scale="2">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_6]"
+                      dataType="i4"
+                      name="Param_6">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\CARGA FRETE_CLIENTE\Comando OLE DB.Outputs[Saída de Comando OLE DB]"
+                  exclusionGroup="1"
+                  name="Saída de Comando OLE DB"
+                  synchronousInputId="Package\CARGA FRETE_CLIENTE\Comando OLE DB.Inputs[Entrada de Comando OLE DB]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\CARGA FRETE_CLIENTE\Comando OLE DB.Outputs[Saída de Erro de Comando OLE DB]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Saída de Erro de Comando OLE DB"
+                  synchronousInputId="Package\CARGA FRETE_CLIENTE\Comando OLE DB.Inputs[Entrada de Comando OLE DB]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Comando OLE DB.Outputs[Saída de Erro de Comando OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FRETE_CLIENTE\Comando OLE DB.Outputs[Saída de Erro de Comando OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Comando OLE DB.Outputs[Saída de Erro de Comando OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FRETE_CLIENTE\Comando OLE DB.Outputs[Saída de Erro de Comando OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\CARGA FRETE_CLIENTE\Comando OLE DB 1"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="Comando OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;2"
+              description="Executa uma instrução SQL para cada linha em um fluxo de dados. Por exemplo, chame um procedimento armazenado 'new employee setup' para cada linha da tabela 'new employees'. Observação: a execução de uma instrução SQL para cada linha de um fluxo de dados grande pode demorar."
+              name="Comando OLE DB 1"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="O tempo em segundos antes que um comando expire. Zero indica uma expiração infinita."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="O comando SQL a ser executado."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE [dbo].[FRETE_CLIENTE] SET [FK_CLIENTE] = ?,[FK_NOTA] = ?,[NM_REGIAO] = ?,[NM_TRANSP] = ?,[QT_PRAZO_DIA] = ?,[VL_VALOR] = ? WHERE [PK_FRETE_C] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\CARGA FRETE_CLIENTE\Comando OLE DB 1.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_OLTP]"
+                  connectionManagerRefId="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_OLTP]"
+                  description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\CARGA FRETE_CLIENTE\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB]"
+                  errorOrTruncationOperation="Execução de Comando"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de Comando OLE DB">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].Columns[Cópia de FK_CLIENTE]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de FK_CLIENTE"
+                      externalMetadataColumnId="Package\CARGA FRETE_CLIENTE\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_0]"
+                      lineageId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de FK_CLIENTE]" />
+                    <inputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].Columns[Cópia de FK_NOTA]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de FK_NOTA"
+                      externalMetadataColumnId="Package\CARGA FRETE_CLIENTE\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_1]"
+                      lineageId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de FK_NOTA]" />
+                    <inputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].Columns[Cópia de NM_REGIAO]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Cópia de NM_REGIAO"
+                      externalMetadataColumnId="Package\CARGA FRETE_CLIENTE\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_2]"
+                      lineageId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_REGIAO]" />
+                    <inputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].Columns[Cópia de NM_TRANSP]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="Cópia de NM_TRANSP"
+                      externalMetadataColumnId="Package\CARGA FRETE_CLIENTE\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_3]"
+                      lineageId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_TRANSP]" />
+                    <inputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].Columns[Cópia de PK_FRETE_C]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de PK_FRETE_C"
+                      externalMetadataColumnId="Package\CARGA FRETE_CLIENTE\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_6]"
+                      lineageId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de PK_FRETE_C]" />
+                    <inputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].Columns[Cópia de QT_PRAZO_DIAS]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de QT_PRAZO_DIAS"
+                      externalMetadataColumnId="Package\CARGA FRETE_CLIENTE\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_4]"
+                      lineageId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de QT_PRAZO_DIAS]" />
+                    <inputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].Columns[Cópia de VL_VALOR]"
+                      cachedDataType="numeric"
+                      cachedName="Cópia de VL_VALOR"
+                      cachedPrecision="5"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\CARGA FRETE_CLIENTE\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_5]"
+                      lineageId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de VL_VALOR]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_0]"
+                      dataType="i4"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_1]"
+                      dataType="i4"
+                      name="Param_1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Param_2">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_3]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Param_3">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_4]"
+                      dataType="i4"
+                      name="Param_4">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_5]"
+                      dataType="numeric"
+                      name="Param_5"
+                      precision="10"
+                      scale="2">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_6]"
+                      dataType="i4"
+                      name="Param_6">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\CARGA FRETE_CLIENTE\Comando OLE DB 1.Outputs[Saída de Comando OLE DB]"
+                  exclusionGroup="1"
+                  name="Saída de Comando OLE DB"
+                  synchronousInputId="Package\CARGA FRETE_CLIENTE\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\CARGA FRETE_CLIENTE\Comando OLE DB 1.Outputs[Saída de Erro de Comando OLE DB]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Saída de Erro de Comando OLE DB"
+                  synchronousInputId="Package\CARGA FRETE_CLIENTE\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Comando OLE DB 1.Outputs[Saída de Erro de Comando OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FRETE_CLIENTE\Comando OLE DB 1.Outputs[Saída de Erro de Comando OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Comando OLE DB 1.Outputs[Saída de Erro de Comando OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FRETE_CLIENTE\Comando OLE DB 1.Outputs[Saída de Erro de Comando OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\CARGA FRETE_CLIENTE\Conversão de Dados"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Conversão de Dados;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;0"
+              description="Conversão de Dados"
+              name="Conversão de Dados"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Inputs[Entrada de Conversão de Dados]"
+                  name="Entrada de Conversão de Dados">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Inputs[Entrada de Conversão de Dados].Columns[PK_FRETE_C]"
+                      cachedDataType="r8"
+                      cachedName="PK_FRETE_C"
+                      lineageId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel].Columns[PK_FRETE_C]" />
+                    <inputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Inputs[Entrada de Conversão de Dados].Columns[NM_TRANSP]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="NM_TRANSP"
+                      lineageId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel].Columns[NM_TRANSP]" />
+                    <inputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Inputs[Entrada de Conversão de Dados].Columns[NM_REGIAO]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="NM_REGIAO"
+                      lineageId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel].Columns[NM_REGIAO]" />
+                    <inputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Inputs[Entrada de Conversão de Dados].Columns[VL_VALOR]"
+                      cachedDataType="r8"
+                      cachedName="VL_VALOR"
+                      lineageId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel].Columns[VL_VALOR]" />
+                    <inputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Inputs[Entrada de Conversão de Dados].Columns[QT_PRAZO_DIAS]"
+                      cachedDataType="r8"
+                      cachedName="QT_PRAZO_DIAS"
+                      lineageId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel].Columns[QT_PRAZO_DIAS]" />
+                    <inputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Inputs[Entrada de Conversão de Dados].Columns[FK_CLIENTE]"
+                      cachedDataType="r8"
+                      cachedName="FK_CLIENTE"
+                      lineageId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel].Columns[FK_CLIENTE]" />
+                    <inputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Inputs[Entrada de Conversão de Dados].Columns[FK_NOTA]"
+                      cachedDataType="r8"
+                      cachedName="FK_NOTA"
+                      lineageId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel].Columns[FK_NOTA]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Conversão de Dados]"
+                  exclusionGroup="1"
+                  name="Saída de Conversão de Dados"
+                  synchronousInputId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Inputs[Entrada de Conversão de Dados]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de PK_FRETE_C]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de PK_FRETE_C]"
+                      name="Cópia de PK_FRETE_C"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel].Columns[PK_FRETE_C]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_TRANSP]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      length="100"
+                      lineageId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_TRANSP]"
+                      name="Cópia de NM_TRANSP"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel].Columns[NM_TRANSP]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_REGIAO]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_REGIAO]"
+                      name="Cópia de NM_REGIAO"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel].Columns[NM_REGIAO]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de VL_VALOR]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de VL_VALOR]"
+                      name="Cópia de VL_VALOR"
+                      precision="5"
+                      scale="2"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel].Columns[VL_VALOR]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de QT_PRAZO_DIAS]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de QT_PRAZO_DIAS]"
+                      name="Cópia de QT_PRAZO_DIAS"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel].Columns[QT_PRAZO_DIAS]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de FK_CLIENTE]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de FK_CLIENTE]"
+                      name="Cópia de FK_CLIENTE"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel].Columns[FK_CLIENTE]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de FK_NOTA]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de FK_NOTA]"
+                      name="Cópia de FK_NOTA"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel].Columns[FK_NOTA]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Erro de Conversão de Dados]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Saída de Erro de Conversão de Dados"
+                  synchronousInputId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Inputs[Entrada de Conversão de Dados]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Erro de Conversão de Dados].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Erro de Conversão de Dados].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Erro de Conversão de Dados].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Erro de Conversão de Dados].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\CARGA FRETE_CLIENTE\Dimensão de Alteração Lenta"
+              componentClassID="Microsoft.SCD"
+              contactInfo="Dimensão de Alteração Lenta;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;3"
+              description="Atualiza uma dimensão de data warehouse do SQL Server Analysis Services. Atualize registros da dimensão que já estejam presentes e insira os registros que não estão. Por exemplo, atualize a tabela DimProduct do banco de dados OLAP AdventureWorksDW com dados da tabela Products do banco de dados OLTP AdventureWorks."
+              name="Dimensão de Alteração Lenta"
+              version="3">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Especifica a instrução SELECT usada para criar um conjunto de linhas de esquema."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT [FK_CLIENTE], [FK_NOTA], [NM_REGIAO], [NM_TRANSP], [PK_FRETE_C], [QT_PRAZO_DIA], [VL_VALOR] FROM [dbo].[FRETE_CLIENTE]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica a cláusula WHERE na instrução SELECT que seleciona a linha atual entre as linhas com chaves de negócios idênticas."
+                  name="CurrentRowWhere"></property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se as atualizações de atributo de histórico são direcionadas para a saída de transformação para atualizações de atributo de alteração."
+                  name="UpdateChangingAttributeHistory">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se a transformação falhará quando as colunas com atributos fixos contiverem alterações."
+                  name="FailOnFixedAttributeChange">false</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica o nome da coluna para o membro inferido."
+                  name="InferredMemberIndicator"></property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se as atualizações de membro inferido são detectadas."
+                  name="EnableInferredMember">true</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se a transformação falhará quando uma pesquisa de registro existente falhar."
+                  name="FailOnLookupFailure">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica que todas as linhas na entrada são novas ou a transformação detecta o tipo de alteração."
+                  name="IncomingRowChangeType"
+                  typeConverter="IncomingRowChangeType">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\CARGA FRETE_CLIENTE\Dimensão de Alteração Lenta.Connections[LookupConnection]"
+                  connectionManagerID="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_OLTP]"
+                  connectionManagerRefId="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_OLTP]"
+                  description="Define a conexão a ser usada para pesquisas na tabela de dimensão"
+                  name="LookupConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\CARGA FRETE_CLIENTE\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta]"
+                  name="Entrada de Dimensão de Alteração Lenta">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].Columns[Cópia de FK_CLIENTE]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de FK_CLIENTE"
+                      externalMetadataColumnId="Package\CARGA FRETE_CLIENTE\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[FK_CLIENTE]"
+                      lineageId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de FK_CLIENTE]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].Columns[Cópia de FK_NOTA]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de FK_NOTA"
+                      externalMetadataColumnId="Package\CARGA FRETE_CLIENTE\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[FK_NOTA]"
+                      lineageId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de FK_NOTA]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].Columns[Cópia de NM_REGIAO]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Cópia de NM_REGIAO"
+                      externalMetadataColumnId="Package\CARGA FRETE_CLIENTE\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[NM_REGIAO]"
+                      lineageId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_REGIAO]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].Columns[Cópia de NM_TRANSP]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="Cópia de NM_TRANSP"
+                      externalMetadataColumnId="Package\CARGA FRETE_CLIENTE\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[NM_TRANSP]"
+                      lineageId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_TRANSP]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].Columns[Cópia de PK_FRETE_C]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de PK_FRETE_C"
+                      externalMetadataColumnId="Package\CARGA FRETE_CLIENTE\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[PK_FRETE_C]"
+                      lineageId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de PK_FRETE_C]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].Columns[Cópia de QT_PRAZO_DIAS]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de QT_PRAZO_DIAS"
+                      externalMetadataColumnId="Package\CARGA FRETE_CLIENTE\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[QT_PRAZO_DIA]"
+                      lineageId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de QT_PRAZO_DIAS]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].Columns[Cópia de VL_VALOR]"
+                      cachedDataType="numeric"
+                      cachedName="Cópia de VL_VALOR"
+                      cachedPrecision="5"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\CARGA FRETE_CLIENTE\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[VL_VALOR]"
+                      lineageId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de VL_VALOR]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[FK_CLIENTE]"
+                      dataType="i4"
+                      name="FK_CLIENTE" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[FK_NOTA]"
+                      dataType="i4"
+                      name="FK_NOTA" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[NM_REGIAO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="NM_REGIAO" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[NM_TRANSP]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="NM_TRANSP" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[PK_FRETE_C]"
+                      dataType="i4"
+                      name="PK_FRETE_C" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[QT_PRAZO_DIA]"
+                      dataType="i4"
+                      name="QT_PRAZO_DIA" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[VL_VALOR]"
+                      dataType="numeric"
+                      name="VL_VALOR"
+                      precision="10"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\CARGA FRETE_CLIENTE\Dimensão de Alteração Lenta.Outputs[Saída Inalterada]"
+                  description="Linhas inalteradas"
+                  exclusionGroup="1"
+                  name="Saída Inalterada"
+                  synchronousInputId="Package\CARGA FRETE_CLIENTE\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\CARGA FRETE_CLIENTE\Dimensão de Alteração Lenta.Outputs[Nova Saída]"
+                  description="Novas linhas"
+                  exclusionGroup="1"
+                  name="Nova Saída"
+                  synchronousInputId="Package\CARGA FRETE_CLIENTE\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\CARGA FRETE_CLIENTE\Dimensão de Alteração Lenta.Outputs[Saída de Atributo Fixo]"
+                  description="Linhas com alterações em colunas marcadas com FixedAttribute"
+                  exclusionGroup="1"
+                  name="Saída de Atributo Fixo"
+                  synchronousInputId="Package\CARGA FRETE_CLIENTE\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\CARGA FRETE_CLIENTE\Dimensão de Alteração Lenta.Outputs[Saída de Atualizações de Atributo de Alteração]"
+                  description="Essas linhas contêm novas informações para as alterações da coluna ChangingAttribute (Type 1)"
+                  exclusionGroup="1"
+                  name="Saída de Atualizações de Atributo de Alteração"
+                  synchronousInputId="Package\CARGA FRETE_CLIENTE\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\CARGA FRETE_CLIENTE\Dimensão de Alteração Lenta.Outputs[Saída de Inserções de Atributo de Histórico]"
+                  description="O resultado de alterações de HistoricalAttribute (Type 2) nessas novas linhas"
+                  exclusionGroup="2"
+                  name="Saída de Inserções de Atributo de Histórico"
+                  synchronousInputId="Package\CARGA FRETE_CLIENTE\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\CARGA FRETE_CLIENTE\Dimensão de Alteração Lenta.Outputs[Saída de Atualizações de Membro Inferido]"
+                  description="Informações para atualizar a linha de dimensão inicial sem preenchimento"
+                  exclusionGroup="1"
+                  name="Saída de Atualizações de Membro Inferido"
+                  synchronousInputId="Package\CARGA FRETE_CLIENTE\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Origem do Excel;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;1"
+              description="Origem do Excel"
+              name="FRETE_CLIENTE"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="O tempo em segundos antes que um comando expire. Zero indica uma expiração infinita."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowset">'Form Responses 1$'</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica a variável que contém o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="O comando SQL a ser executado."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="A variável que contém o comando SQL a ser executado."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica o modo usado para acessar o banco de dados."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="O mapeamento de parâmetros no comando SQL para variáveis."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Gerenciador de Conexões do Excel]"
+                  connectionManagerRefId="Package.ConnectionManagers[Gerenciador de Conexões do Excel]"
+                  description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel]"
+                  name="Saída de Origem do Excel">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel].Columns[PK_FRETE_C]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel].ExternalColumns[PK_FRETE_C]"
+                      lineageId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel].Columns[PK_FRETE_C]"
+                      name="PK_FRETE_C"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel].Columns[NM_TRANSP]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel].ExternalColumns[NM_TRANSP]"
+                      length="255"
+                      lineageId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel].Columns[NM_TRANSP]"
+                      name="NM_TRANSP"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel].Columns[NM_REGIAO]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel].ExternalColumns[NM_REGIAO]"
+                      length="255"
+                      lineageId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel].Columns[NM_REGIAO]"
+                      name="NM_REGIAO"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel].Columns[VL_VALOR]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel].ExternalColumns[VL_VALOR]"
+                      lineageId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel].Columns[VL_VALOR]"
+                      name="VL_VALOR"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel].Columns[QT_PRAZO_DIAS]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel].ExternalColumns[QT_PRAZO_DIAS]"
+                      lineageId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel].Columns[QT_PRAZO_DIAS]"
+                      name="QT_PRAZO_DIAS"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel].Columns[FK_CLIENTE]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel].ExternalColumns[FK_CLIENTE]"
+                      lineageId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel].Columns[FK_CLIENTE]"
+                      name="FK_CLIENTE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel].Columns[FK_NOTA]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel].ExternalColumns[FK_NOTA]"
+                      lineageId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel].Columns[FK_NOTA]"
+                      name="FK_NOTA"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel].ExternalColumns[Timestamp]"
+                      dataType="date"
+                      name="Timestamp" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel].ExternalColumns[PK_FRETE_C]"
+                      dataType="r8"
+                      name="PK_FRETE_C" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel].ExternalColumns[NM_TRANSP]"
+                      dataType="wstr"
+                      length="255"
+                      name="NM_TRANSP" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel].ExternalColumns[NM_REGIAO]"
+                      dataType="wstr"
+                      length="255"
+                      name="NM_REGIAO" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel].ExternalColumns[VL_VALOR]"
+                      dataType="r8"
+                      name="VL_VALOR" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel].ExternalColumns[QT_PRAZO_DIAS]"
+                      dataType="r8"
+                      name="QT_PRAZO_DIAS" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel].ExternalColumns[FK_CLIENTE]"
+                      dataType="r8"
+                      name="FK_CLIENTE" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel].ExternalColumns[FK_NOTA]"
+                      dataType="r8"
+                      name="FK_NOTA" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Erro de Origem do Excel]"
+                  isErrorOut="true"
+                  name="Saída de Erro de Origem do Excel">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Erro de Origem do Excel].Columns[PK_FRETE_C]"
+                      dataType="r8"
+                      lineageId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Erro de Origem do Excel].Columns[PK_FRETE_C]"
+                      name="PK_FRETE_C" />
+                    <outputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Erro de Origem do Excel].Columns[NM_TRANSP]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Erro de Origem do Excel].Columns[NM_TRANSP]"
+                      name="NM_TRANSP" />
+                    <outputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Erro de Origem do Excel].Columns[NM_REGIAO]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Erro de Origem do Excel].Columns[NM_REGIAO]"
+                      name="NM_REGIAO" />
+                    <outputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Erro de Origem do Excel].Columns[VL_VALOR]"
+                      dataType="r8"
+                      lineageId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Erro de Origem do Excel].Columns[VL_VALOR]"
+                      name="VL_VALOR" />
+                    <outputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Erro de Origem do Excel].Columns[QT_PRAZO_DIAS]"
+                      dataType="r8"
+                      lineageId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Erro de Origem do Excel].Columns[QT_PRAZO_DIAS]"
+                      name="QT_PRAZO_DIAS" />
+                    <outputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Erro de Origem do Excel].Columns[FK_CLIENTE]"
+                      dataType="r8"
+                      lineageId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Erro de Origem do Excel].Columns[FK_CLIENTE]"
+                      name="FK_CLIENTE" />
+                    <outputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Erro de Origem do Excel].Columns[FK_NOTA]"
+                      dataType="r8"
+                      lineageId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Erro de Origem do Excel].Columns[FK_NOTA]"
+                      name="FK_NOTA" />
+                    <outputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Erro de Origem do Excel].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Erro de Origem do Excel].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Erro de Origem do Excel].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Erro de Origem do Excel].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\CARGA FRETE_CLIENTE\Inserir Destino"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="Destino OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;4"
+              description="Destino OLE DB"
+              name="Inserir Destino"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="O tempo em segundos antes que um comando expire. Zero indica uma expiração infinita."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowset">[dbo].[FRETE_CLIENTE]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica a variável que contém o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="O comando SQL a ser executado."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forca o uso do valor da propriedade DefaultCodePage durante a descrição dos dados de caractere."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica o modo usado para acessar o banco de dados."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se os valores fornecidos para colunas de identidade serão copiados no destino. Se false, os valores para colunas de identidade serão gerados automaticamente no destino. Aplicável apenas se o carregamento rápido estiver ativado."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se as colunas que contêm null terão null inserido no destino. Se false, as colunas que contêm null terão seus valores padrão inseridos no destino. Aplicável apenas se o carregamento rápido estiver ativado."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica as opções a serem usadas com o carregamento rápido. Aplicável apenas se o carregamento rápido estiver ativado."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica quando confirmações são emitidas durante a inserção de dados. Um valor de 0 especifica que uma confirmação será emitida ao final da inserção de dados. Aplicável somente se o carregamento rápido estiver ativado."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\CARGA FRETE_CLIENTE\Inserir Destino.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_OLTP]"
+                  connectionManagerRefId="Package.ConnectionManagers[SHAMSLUX-PC.ELLAS_OLTP]"
+                  description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\CARGA FRETE_CLIENTE\Inserir Destino.Inputs[Entrada de Destino OLE DB]"
+                  errorOrTruncationOperation="Inserir"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de Destino OLE DB">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Inserir Destino.Inputs[Entrada de Destino OLE DB].Columns[Cópia de PK_FRETE_C]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de PK_FRETE_C"
+                      externalMetadataColumnId="Package\CARGA FRETE_CLIENTE\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[PK_FRETE_C]"
+                      lineageId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de PK_FRETE_C]" />
+                    <inputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Inserir Destino.Inputs[Entrada de Destino OLE DB].Columns[Cópia de NM_TRANSP]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="Cópia de NM_TRANSP"
+                      externalMetadataColumnId="Package\CARGA FRETE_CLIENTE\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[NM_TRANSP]"
+                      lineageId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_TRANSP]" />
+                    <inputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Inserir Destino.Inputs[Entrada de Destino OLE DB].Columns[Cópia de NM_REGIAO]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Cópia de NM_REGIAO"
+                      externalMetadataColumnId="Package\CARGA FRETE_CLIENTE\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[NM_REGIAO]"
+                      lineageId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de NM_REGIAO]" />
+                    <inputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Inserir Destino.Inputs[Entrada de Destino OLE DB].Columns[Cópia de VL_VALOR]"
+                      cachedDataType="numeric"
+                      cachedName="Cópia de VL_VALOR"
+                      cachedPrecision="5"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\CARGA FRETE_CLIENTE\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[VL_VALOR]"
+                      lineageId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de VL_VALOR]" />
+                    <inputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Inserir Destino.Inputs[Entrada de Destino OLE DB].Columns[Cópia de QT_PRAZO_DIAS]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de QT_PRAZO_DIAS"
+                      externalMetadataColumnId="Package\CARGA FRETE_CLIENTE\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[QT_PRAZO_DIA]"
+                      lineageId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de QT_PRAZO_DIAS]" />
+                    <inputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Inserir Destino.Inputs[Entrada de Destino OLE DB].Columns[Cópia de FK_CLIENTE]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de FK_CLIENTE"
+                      externalMetadataColumnId="Package\CARGA FRETE_CLIENTE\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[FK_CLIENTE]"
+                      lineageId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de FK_CLIENTE]" />
+                    <inputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Inserir Destino.Inputs[Entrada de Destino OLE DB].Columns[Cópia de FK_NOTA]"
+                      cachedDataType="i4"
+                      cachedName="Cópia de FK_NOTA"
+                      externalMetadataColumnId="Package\CARGA FRETE_CLIENTE\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[FK_NOTA]"
+                      lineageId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Conversão de Dados].Columns[Cópia de FK_NOTA]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[PK_FRETE_C]"
+                      dataType="i4"
+                      name="PK_FRETE_C" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[NM_TRANSP]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="NM_TRANSP" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[NM_REGIAO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="NM_REGIAO" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[VL_VALOR]"
+                      dataType="numeric"
+                      name="VL_VALOR"
+                      precision="10"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[QT_PRAZO_DIA]"
+                      dataType="i4"
+                      name="QT_PRAZO_DIA" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[FK_CLIENTE]"
+                      dataType="i4"
+                      name="FK_CLIENTE" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[FK_NOTA]"
+                      dataType="i4"
+                      name="FK_NOTA" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\CARGA FRETE_CLIENTE\Inserir Destino.Outputs[Saída de Erro de Destino OLE DB]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Saída de Erro de Destino OLE DB"
+                  synchronousInputId="Package\CARGA FRETE_CLIENTE\Inserir Destino.Inputs[Entrada de Destino OLE DB]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Inserir Destino.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FRETE_CLIENTE\Inserir Destino.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CARGA FRETE_CLIENTE\Inserir Destino.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FRETE_CLIENTE\Inserir Destino.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\CARGA FRETE_CLIENTE.Paths[Nova Saída]"
+              endId="Package\CARGA FRETE_CLIENTE\Inserir Destino.Inputs[Entrada de Destino OLE DB]"
+              name="Nova Saída"
+              startId="Package\CARGA FRETE_CLIENTE\Dimensão de Alteração Lenta.Outputs[Nova Saída]" />
+            <path
+              refId="Package\CARGA FRETE_CLIENTE.Paths[Saída de Atualizações de Atributo de Alteração]"
+              endId="Package\CARGA FRETE_CLIENTE\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB]"
+              name="Saída de Atualizações de Atributo de Alteração"
+              startId="Package\CARGA FRETE_CLIENTE\Dimensão de Alteração Lenta.Outputs[Saída de Atualizações de Atributo de Alteração]" />
+            <path
+              refId="Package\CARGA FRETE_CLIENTE.Paths[Saída de Atualizações de Membro Inferido]"
+              endId="Package\CARGA FRETE_CLIENTE\Comando OLE DB.Inputs[Entrada de Comando OLE DB]"
+              name="Saída de Atualizações de Membro Inferido"
+              startId="Package\CARGA FRETE_CLIENTE\Dimensão de Alteração Lenta.Outputs[Saída de Atualizações de Membro Inferido]" />
+            <path
+              refId="Package\CARGA FRETE_CLIENTE.Paths[Saída de Conversão de Dados]"
+              endId="Package\CARGA FRETE_CLIENTE\Dimensão de Alteração Lenta.Inputs[Entrada de Dimensão de Alteração Lenta]"
+              name="Saída de Conversão de Dados"
+              startId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Outputs[Saída de Conversão de Dados]" />
+            <path
+              refId="Package\CARGA FRETE_CLIENTE.Paths[Saída de Origem do Excel]"
+              endId="Package\CARGA FRETE_CLIENTE\Conversão de Dados.Inputs[Entrada de Conversão de Dados]"
+              name="Saída de Origem do Excel"
+              startId="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE.Outputs[Saída de Origem do Excel]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Esta seção CDATA contém as informações de layout do pacote. A seção inclui informações como coordenadas (x,y), largura e altura.-->
+<!--Se você editar manualmente esta seção e cometer algum erro, poderá excluí-la. -->
+<!--O pacote ainda poderá ser carregado normalmente, mas as informações de layout anteriores serão perdidas e o designer reorganizará automaticamente os elementos na superfície de design.-->
+<Objects
+  Version="8">
+  <!--Cada nó abaixo conterá propriedades que não afetam o comportamento em tempo de execução.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="193.333333333334,42.6666666666667"
+          Id="Package\CARGA FRETE_CLIENTE"
+          TopLeft="54.3749991897493,38.3499993142486" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\CARGA FRETE_CLIENTE">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="157.333333333334,42.6666666666667"
+          Id="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE"
+          TopLeft="218.5,5.49999999999993" />
+        <NodeLayout
+          Size="176,42.6666666666667"
+          Id="Package\CARGA FRETE_CLIENTE\Conversão de Dados"
+          TopLeft="209.166666666667,108.166666666667" />
+        <EdgeLayout
+          Id="Package\CARGA FRETE_CLIENTE.Paths[Saída de Origem do Excel]"
+          TopLeft="297.166666666667,48.1666666666666">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="217.333333333334,42.6666666666667"
+          Id="Package\CARGA FRETE_CLIENTE\Dimensão de Alteração Lenta"
+          TopLeft="188.5,210.833333333333" />
+        <EdgeLayout
+          Id="Package\CARGA FRETE_CLIENTE.Paths[Saída de Conversão de Dados]"
+          TopLeft="297.166666666667,150.833333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="149.333333333334,42.6666666666667"
+          Id="Package\CARGA FRETE_CLIENTE\Inserir Destino"
+          TopLeft="5.50000000000001,313.5" />
+        <EdgeLayout
+          Id="Package\CARGA FRETE_CLIENTE.Paths[Nova Saída]"
+          TopLeft="244.833333333333,253.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-164.666666666667,60.0000000000001"
+              Start="0,0"
+              End="-164.666666666667,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.4848484848485" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.4848484848485"
+                    Point2="0,20.4848484848485"
+                    Point3="-4,20.4848484848485" />
+                  <mssgle:LineSegment
+                    End="-160.666666666667,20.4848484848485" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-160.666666666667,20.4848484848485"
+                    Point2="-164.666666666667,20.4848484848485"
+                    Point3="-164.666666666667,24.4848484848485" />
+                  <mssgle:LineSegment
+                    End="-164.666666666667,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-107.326692708333,25.4848484848485,49.98671875,10.3349609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="162.666666666667,42.6666666666667"
+          Id="Package\CARGA FRETE_CLIENTE\Comando OLE DB"
+          TopLeft="215.833333333333,313.5" />
+        <EdgeLayout
+          Id="Package\CARGA FRETE_CLIENTE.Paths[Saída de Atualizações de Membro Inferido]"
+          TopLeft="297.166666666667,253.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-93.5976953125,20.1254882812501,187.195390625,12.2490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="172,42.6666666666667"
+          Id="Package\CARGA FRETE_CLIENTE\Comando OLE DB 1"
+          TopLeft="439.166666666667,313.5" />
+        <EdgeLayout
+          Id="Package\CARGA FRETE_CLIENTE.Paths[Saída de Atualizações de Atributo de Alteração]"
+          TopLeft="349.5,253.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="175.666666666667,60.0000000000001"
+              Start="0,0"
+              End="175.666666666667,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.4848484848485" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.4848484848485"
+                    Point2="0,20.4848484848485"
+                    Point3="4,20.4848484848485" />
+                  <mssgle:LineSegment
+                    End="171.666666666667,20.4848484848485" />
+                  <mssgle:CubicBezierSegment
+                    Point1="171.666666666667,20.4848484848485"
+                    Point2="175.666666666667,20.4848484848485"
+                    Point3="175.666666666667,24.4848484848485" />
+                  <mssgle:LineSegment
+                    End="175.666666666667,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-15.5293619791667,25.4848484848485,206.725390625,12.2490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\CARGA FRETE_CLIENTE\FRETE_CLIENTE">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\CARGA FRETE_CLIENTE\Dimensão de Alteração Lenta">
+    <Properties>
+      <Property>
+        <Name>SCDMetadata</Name>
+        <Value
+          type="q2:string">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SCDWizardMetadata xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionID&gt;{AF7CFE88-B6B1-4A41-AA55-A674D8360BD8}&lt;/ConnectionID&gt;
+  &lt;TableName&gt;[dbo].[FRETE_CLIENTE]&lt;/TableName&gt;
+  &lt;InputToColumnsCollection&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Conversão de Dados.Saídas[Saída de Conversão de Dados].Colunas[Cópia de FK_CLIENTE]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;FK_CLIENTE&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Conversão de Dados.Saídas[Saída de Conversão de Dados].Colunas[Cópia de FK_NOTA]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;FK_NOTA&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Conversão de Dados.Saídas[Saída de Conversão de Dados].Colunas[Cópia de NM_REGIAO]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;NM_REGIAO&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Conversão de Dados.Saídas[Saída de Conversão de Dados].Colunas[Cópia de NM_TRANSP]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;NM_TRANSP&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Conversão de Dados.Saídas[Saída de Conversão de Dados].Colunas[Cópia de PK_FRETE_C]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;PK_FRETE_C&lt;/ColumnName&gt;
+      &lt;KeyType&gt;BusinessKey&lt;/KeyType&gt;
+      &lt;ChangeType&gt;None&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Conversão de Dados.Saídas[Saída de Conversão de Dados].Colunas[Cópia de QT_PRAZO_DIAS]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;QT_PRAZO_DIA&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Conversão de Dados.Saídas[Saída de Conversão de Dados].Colunas[Cópia de VL_VALOR]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;VL_VALOR&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+  &lt;/InputToColumnsCollection&gt;
+  &lt;GeneratedComponentsIdentificationStrings&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;Inserir Destino&lt;/anyType&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;Comando OLE DB&lt;/anyType&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;Comando OLE DB 1&lt;/anyType&gt;
+  &lt;/GeneratedComponentsIdentificationStrings&gt;
+  &lt;FailFixedAttribute&gt;false&lt;/FailFixedAttribute&gt;
+  &lt;FailChangeAttribute&gt;false&lt;/FailChangeAttribute&gt;
+  &lt;UseStartEndDate&gt;false&lt;/UseStartEndDate&gt;
+  &lt;CurrentIndicatorColumn /&gt;
+  &lt;InferredIndicatorColumn /&gt;
+  &lt;ValueCurrent /&gt;
+  &lt;ValueExpired /&gt;
+  &lt;StartDateColumn /&gt;
+  &lt;EndDateColumn /&gt;
+  &lt;DateVariable /&gt;
+  &lt;EnableInferredSupport&gt;true&lt;/EnableInferredSupport&gt;
+&lt;/SCDWizardMetadata&gt;</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
