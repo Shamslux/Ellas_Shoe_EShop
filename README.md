@@ -28,6 +28,10 @@ The final phase was the creation of the reports in Power BI.
 - SSIS integrated with Visual Studio
 - Knowledge of ETL, OLTP, OLAP, Datawarehouse, Data Mart, etc.
 
+# Notes
+
+- As it is a simple personal project, probably there still some flaws, but as I discover them, I will try to solve them and update the repository. My main goal now is to exhbit my skills at least to become a intern at a nice company to start my BI life! 
+
 # Acknowledgment
 
 I will be always grateful to my friend Tulio Brasileiro, who is helping me a lot in this project, as he helped me too in the first one. He is a high skilled Business Intelligence Analyst and Data Scientist. I expect to finally enter this field and keep sharing good moments with my friend, learning much more from him and others new friends that I am sure I will be making in the following years. Thank you!
