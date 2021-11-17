@@ -1,3 +1,7 @@
+![MicrosoftSQLServer](https://img.shields.io/badge/Microsoft%20SQL%20Sever-CC2927?style=for-the-badge&logo=microsoft%20sql%20server&logoColor=white)
+![MicrosoftPowerBI](https://img.shields.io/badge/PowerBI-F2C811?style=for-the-badge&logo=Power%20BI&logoColor=white)
+
+
 # Ellas_Shoe_EShop
 A project of OLTP environment and OLAP environment. Main features: ETL, STAGE, DW, SQL Server, SSIS, etc.
 
@@ -38,7 +42,5 @@ I will be always grateful to my friend Tulio Brasileiro, who is helping me a lot
 
 Surely, the many thanks to the Friend of all friends: dear Lord Jesus Christ, thank You Big Bro.!
 	
-![MicrosoftSQLServer](https://img.shields.io/badge/Microsoft%20SQL%20Sever-CC2927?style=for-the-badge&logo=microsoft%20sql%20server&logoColor=white)
-![MicrosoftPowerBI](https://img.shields.io/badge/PowerBI-F2C811?style=for-the-badge&logo=Power%20BI&logoColor=white)
 
 
